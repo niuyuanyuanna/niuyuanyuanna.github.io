@@ -1,184 +1,32 @@
-<!DOCTYPE HTML>
-<html>
-
-<head>
-	<link rel="bookmark"  type="image/x-icon"  href="/img/logo_miccall.png"/>
-	<link rel="shortcut icon" href="/img/logo_miccall.png">
-	
-			    <title>
-    NYY's blog
-    </title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="/css/mic_main.css" />
-    <link rel="stylesheet" href="/css/dropdownMenu.css" />
-    <meta name="keywords" content="miccall" />
-    
-    	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-	 
-    <noscript>
-        <link rel="stylesheet" href="/css/noscript.css" />
-    </noscript>
-    <style type="text/css">
-        body:before {
-          content: ' ';
-          position: fixed;
-          top: 0;
-          background: url('/img/bg.jpg') center 0 no-repeat;
-          right: 0;
-          bottom: 0;
-          left: 0;
-          background-size: cover; 
-        }
-    </style>
-
-			    
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script async type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-  
-
-
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/jquery.scrollex.min.js"></script>
-    <script src="/js/jquery.scrolly.min.js"></script>
-    <script src="/js/skel.min.js"></script>
-    <script src="/js/util.js"></script>
-    <script src="/js/main.js"></script>
-	
-</head>
-    
-		
-<!-- Layouts -->
-
-
-
-<!--  代码渲染  -->
-<link rel="stylesheet" href="/css/prism_coy.css" />
-<link rel="stylesheet" href="/css/typo.css" />
-<!-- 文章页 -->
-<body class="is-loading">
-    <!-- Wrapper 外包 s-->
-    <div id="wrapper" class="fade-in">
-        <!-- Intro 头部显示 s -->
-        <!-- Intro 头部显示 e -->
-        <!-- Header 头部logo start -->
-        <header id="header">
-    <a href="/" class="logo">NYY</a>
-</header>
-        <!-- Nav 导航条 start -->
-        <nav id="nav" class="special" >
-            <ul class="menu links" >
-			<!-- Homepage  主页  --> 
-			<li >
-	            <a href="/" rel="nofollow">主页</a>
-	        </li>
-			<!-- categories_name  分类   --> 
-	        
-	        <li class="active">
-	            <a href="#s1">分类</a>
-	                    <ul class="submenu">
-	                        <li>
-	                        
-	                    </ul>
-	        </li>
-	        
-	        <!-- archives  归档   --> 
-	        
-	        
-		        <!-- Pages 自定义   -->
-		        
-		        <li>
-		            <a href="/about/" title="简历">
-		                简历
-		            </a>
-		        </li>
-		        
-		        <li>
-		            <a href="/group/" title="团队">
-		                团队
-		            </a>
-		        </li>
-		        
-		        <li>
-		            <a href="/gallery/" title="图库">
-		                图库
-		            </a>
-		        </li>
-		        
-		        <li>
-		            <a href="/tag/" title="标签">
-		                标签
-		            </a>
-		        </li>
-		        
-
-
-            </ul>
-            <!-- icons 图标   -->
-			<ul class="icons">
-		            
-		                <li><a href="https://github.com/niuyuanyuanna" class="icon fa-github"><span class="label">GitHub</span></a></li>
-		            
-		            
-		            
-		            
-			</ul>
-</nav>
-
-        <div id="main" >
-            <div class ="post_page_title_img" style="height: 25rem;background-image: url();background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
-                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >数据结构之向量</h2></a>
-            </div>
-            <!-- Post -->
-            <div class="typo" style="padding: 3rem;">
-                <p>&emsp;&emsp;根据清华大学邓俊辉老师的课程整理记录。使用C++编程。</p>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="数据结构之向量"><meta name="keywords" content="数据结构,C++"><meta name="author" content="NYY,undefined"><meta name="copyright" content="NYY"><title>数据结构之向量 | NYY's blog</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css?version=1.5.1"><script>var GLOBAL = { 
+  root: '/',
+  algolia: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  localSearch: undefined
+} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#向量基础"><span class="toc-number">1.</span> <span class="toc-text">向量基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#向量概念"><span class="toc-number">1.1.</span> <span class="toc-text">向量概念</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#无序向量"><span class="toc-number">2.</span> <span class="toc-text">无序向量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#向量的动态扩容"><span class="toc-number">2.1.</span> <span class="toc-text">向量的动态扩容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#向量插入"><span class="toc-number">2.2.</span> <span class="toc-text">向量插入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#区间删除"><span class="toc-number">2.3.</span> <span class="toc-text">区间删除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查找操作"><span class="toc-number">2.4.</span> <span class="toc-text">查找操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#去重操作"><span class="toc-number">2.5.</span> <span class="toc-text">去重操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#遍历操作"><span class="toc-number">2.6.</span> <span class="toc-text">遍历操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#有序向量"><span class="toc-number">3.</span> <span class="toc-text">有序向量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#唯一化"><span class="toc-number">3.1.</span> <span class="toc-text">唯一化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二分查找"><span class="toc-number">3.2.</span> <span class="toc-text">二分查找</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#无序向量有序化"><span class="toc-number">4.</span> <span class="toc-text">无序向量有序化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#冒泡排序"><span class="toc-number">4.1.</span> <span class="toc-text">冒泡排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#并归排序"><span class="toc-number">4.2.</span> <span class="toc-text">并归排序</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://i.loli.net/2018/04/05/5ac5c474e8082.jpg"></div><div class="author-info__name text-center">NYY</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">1</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">2</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">1</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://i.loli.net/2018/04/04/5ac4db8ce0787.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">NYY's blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span></div><div id="post-info"><div id="post-title">数据结构之向量</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-04-04</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Algorithm/">Algorithm</a><span class="post-meta__separator">|</span><i class="fa fa-comment-o post-meta__icon" aria-hidden="true"></i><a href="/2018/04/04/hello-world/#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2018/04/04/hello-world/"></span></a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">3,011</span><span class="post-meta__separator">|</span><span>Reading time: 13 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div id="post-content"><p>&emsp;&emsp;根据清华大学邓俊辉老师的课程整理记录。使用C++编程。</p>
 <h2 id="向量基础"><a href="#向量基础" class="headerlink" title="向量基础"></a>向量基础</h2><h3 id="向量概念"><a href="#向量概念" class="headerlink" title="向量概念"></a>向量概念</h3><p>&emsp;&emsp;向量是数组的抽象与泛化，由一组元素按照现行次序封装而成。</p>
 <ul>
-<li><p>各元素与[0,n)内的秩一一对应</p>
-</li>
-<li><p>元素类型不限于基本类型</p>
-</li>
-<li><p>操作、管理、维护更简化、统一、安全</p>
-</li>
-<li><p>可更为敏捷参与复杂数据结构的控制与实现</p>
-</li>
+<li>各元素与[0,n)内的秩一一对应</li>
+<li>元素类型不限于基本类型 </li>
+<li>操作、管理、维护更简化、统一、安全</li>
+<li>可更为敏捷参与复杂数据结构的控制与实现</li>
 </ul>
 <p>&emsp;&emsp;向量ADT接口：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">size()</span><br><span class="line">get()</span><br><span class="line">put(r,e)</span><br><span class="line">insert(r,e)</span><br><span class="line">remove(r)</span><br><span class="line">disordered()</span><br><span class="line">sort()</span><br><span class="line">find(e)                 查找目标元素e</span><br><span class="line">search(e)               查找目标元素e，返回不大于e且秩最大的元素</span><br><span class="line">deduplicate()           删除重复元素</span><br><span class="line">uniquify()              删除重复元素</span><br><span class="line">traverse()              遍历向量并统一处理</span><br></pre></td></tr></table></figure>
-<p>##无序向量</p>
-<p>###向量的动态扩容</p>
-<p>&emsp;&emsp;copyfrom接口在copy向量时申请的容量是copy内容的两倍，因此可根据这种方式来进行扩容，其累计增容时间为$O(n^{2})$,分摊增益时间为$O(n)$</p>
+<h2 id="无序向量"><a href="#无序向量" class="headerlink" title="无序向量"></a>无序向量</h2><h3 id="向量的动态扩容"><a href="#向量的动态扩容" class="headerlink" title="向量的动态扩容"></a>向量的动态扩容</h3><p>&emsp;&emsp;copyfrom接口在copy向量时申请的容量是copy内容的两倍，因此可根据这种方式来进行扩容，其累计增容时间为$O(n^{2})$,分摊增益时间为$O(n)$</p>
 <p>&emsp;&emsp;扩容代码：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">void Vector&lt;T&gt;::<span class="function"><span class="title">expand</span></span>()&#123;</span><br><span class="line">    <span class="keyword">if</span>(_size&lt;_capacity) <span class="built_in">return</span>;</span><br><span class="line">    _capacity = max(_capacity,DEFAULT_CAPACITY);</span><br><span class="line">    T* oldElem = _elem;</span><br><span class="line">    _elem = new T[_capacity &lt;&lt;=1]; //容量加倍,移位</span><br><span class="line">    <span class="keyword">for</span>(int i = 0; i &lt; _size; i++)</span><br><span class="line">        _elem[i] = oldElem[i];</span><br><span class="line">    delete [] oldElem;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="向量插入"><a href="#向量插入" class="headerlink" title="向量插入"></a>向量插入</h3><p>&emsp;&emsp;将向量的后继整体向后移位，空出一个位置后将其插入<br>&emsp;&emsp;算法实现：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Rank Vector&lt;T&gt;::insert(Raank r, T const &amp; e)&#123;</span><br><span class="line">    expand()  //如有必要先考虑扩容</span><br><span class="line">    <span class="keyword">for</span>(int i = _size; i &gt; r; i--)  //从后往前移位，若从前往后移可能出现覆盖的现象</span><br><span class="line">        _elem[i] = _elem[i-1];</span><br><span class="line">    _elem[r] = e;</span><br><span class="line">    _size++;</span><br><span class="line">    <span class="built_in">return</span> r;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="区间删除"><a href="#区间删除" class="headerlink" title="区间删除"></a>区间删除</h3><p>&emsp;&emsp;将后继左移填补删除部分，时间复杂度为$O(n)$<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int Vector&lt;T&gt;::remove(Rank lo,Rank hi)&#123;</span><br><span class="line">    if(lo==hi) return 0;</span><br><span class="line">    while(hi &lt; _size) </span><br><span class="line">        _elem[lo++] = _elem[hi++];</span><br><span class="line">    _size = lo;</span><br><span class="line">    shrink();  //更新规模</span><br><span class="line">    return hi - lo;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="区间删除"><a href="#区间删除" class="headerlink" title="区间删除"></a>区间删除</h3><p>&emsp;&emsp;将后继左移填补删除部分，时间复杂度为$O(n)$。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int Vector&lt;T&gt;::remove(Rank lo,Rank hi)&#123;</span><br><span class="line">    if(lo==hi) return 0;</span><br><span class="line">    while(hi &lt; _size) </span><br><span class="line">        _elem[lo++] = _elem[hi++];</span><br><span class="line">    _size = lo;</span><br><span class="line">    shrink();  //更新规模</span><br><span class="line">    return hi - lo;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>&emsp;&emsp;单元素删除可看做区间删除的特例$[r]=[r,r+1)$，时间复杂度为$O(n)$。若在进行区间操作时，叠加单元素操作进行区间操作会导致$O(n^{2})$的时间复杂度。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">T Vector&lt;T&gt;::remove(Rank r)&#123;</span><br><span class="line">    T e = _elem[r];  //备份被删除的元素</span><br><span class="line">    remove(r, r+1); //调用区间删除算法</span><br><span class="line">    return e;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>###查找操作</p>
-<p>&emsp;&emsp;查找操作都是从后向前查找匹配的元素，在最坏的情况下，其时间复杂度为$O(n)$，但在n给定的情况下其时间复杂度为$O(1)$。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Rank Vector&lt;T&gt;::find(T const &amp; e, Rank lo, Rank hi)&#123;</span><br><span class="line">    while((lo &lt; hi--) &amp;&amp; (e != _elem[hi]));</span><br><span class="line">    return hi; //hi&lt;lo时查找失败，否则hi为命中元素的秩</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>###去重操作</p>
-<p>&emsp;&emsp;无序向量的唯一化需要用到去重操作。<br>&emsp;&emsp;while循环中find操作查找当前元素的前驱，remove对后继操作，则累计时间复杂度为$O(n^{2})$。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int Vector&lt;T&gt;::deduplicate()&#123;</span><br><span class="line">    int oldSize = _size;</span><br><span class="line">    Rank i = 1;        //初始值从_elem[1]开始</span><br><span class="line">    while(i &lt; _size)&#123;  //从前向后查询是否有与_elem[i]相同的元素，若有就删除</span><br><span class="line">        (find(_elem[i], 0, i)) &lt; 0 ? i++ : remove(i);</span><br><span class="line">    &#125;</span><br><span class="line">    return oldSize - _size;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>###遍历操作</p>
-<p>&emsp;&emsp;统一对各元素实施visit操作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">struct Increase&#123;</span><br><span class="line">    virtual void operator()(T &amp; e)&#123;e++;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void increase(Vector&lt;T&gt; &amp; V)&#123;</span><br><span class="line">    V.traverse(Increase&lt;T&gt;());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>##有序向量</p>
-<p>###唯一化<br>&emsp;&emsp;将无序向量有序化后便于操作，如无序向量的去重操作对应有序向量的唯一化操作，前者的时间复杂度为$O(n^{2})$。</p>
+<h3 id="查找操作"><a href="#查找操作" class="headerlink" title="查找操作"></a>查找操作</h3><p>&emsp;&emsp;查找操作都是从后向前查找匹配的元素，在最坏的情况下，其时间复杂度为$O(n)$，但在n给定的情况下其时间复杂度为$O(1)$。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Rank Vector&lt;T&gt;::find(T const &amp; e, Rank lo, Rank hi)&#123;</span><br><span class="line">    while((lo &lt; hi--) &amp;&amp; (e != _elem[hi]));</span><br><span class="line">    return hi; //hi&lt;lo时查找失败，否则hi为命中元素的秩</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="去重操作"><a href="#去重操作" class="headerlink" title="去重操作"></a>去重操作</h3><p>&emsp;&emsp;无序向量的唯一化需要用到去重操作。<br>&emsp;&emsp;while循环中find操作查找当前元素的前驱，remove对后继操作，则累计时间复杂度为$O(n^{2})$。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int Vector&lt;T&gt;::deduplicate()&#123;</span><br><span class="line">    int oldSize = _size;</span><br><span class="line">    Rank i = 1;        //初始值从_elem[1]开始</span><br><span class="line">    while(i &lt; _size)&#123;  //从前向后查询是否有与_elem[i]相同的元素，若有就删除</span><br><span class="line">        (find(_elem[i], 0, i)) &lt; 0 ? i++ : remove(i);</span><br><span class="line">    &#125;</span><br><span class="line">    return oldSize - _size;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="遍历操作"><a href="#遍历操作" class="headerlink" title="遍历操作"></a>遍历操作</h3><p>&emsp;&emsp;统一对各元素实施visit操作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">struct Increase&#123;</span><br><span class="line">    virtual void operator()(T &amp; e)&#123;e++;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void increase(Vector&lt;T&gt; &amp; V)&#123;</span><br><span class="line">    V.traverse(Increase&lt;T&gt;());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="有序向量"><a href="#有序向量" class="headerlink" title="有序向量"></a>有序向量</h2><h3 id="唯一化"><a href="#唯一化" class="headerlink" title="唯一化"></a>唯一化</h3><p>&emsp;&emsp;将无序向量有序化后便于操作，如无序向量的去重操作对应有序向量的唯一化操作，前者的时间复杂度为$O(n^{2})$。</p>
 <ul>
 <li>有序序列，任意一对相邻元素顺序</li>
 <li>无序序列，总有一对相邻元素逆序</li>
@@ -187,18 +35,17 @@
 <p>&emsp;&emsp;检查各相邻元素是顺序或者逆序：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int Vector&lt;T&gt;::disordered() condt&#123;</span><br><span class="line">    int n = 0;</span><br><span class="line">    for(int i=1; i &lt; _size; i++)</span><br><span class="line">        n += (_elem[i-1] &gt; _elem[i]);</span><br><span class="line">    return n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>&emsp;&emsp;将无序向量的去重操作推广到有序向量更为高效。</p>
-<ol>
+<ul>
 <li>有序向量去重法一<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int Vector&lt;T&gt;::uniquify()&#123;</span><br><span class="line">    int oldSize = _size;</span><br><span class="line">    int i = 0;</span><br><span class="line">    while(i &lt; _size-1)&#123;</span><br><span class="line">        (_elem[i] == _elem[i+1]) ? remove(i+1):i++;</span><br><span class="line">    &#125;</span><br><span class="line">    return oldSize - _size;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-</ol>
+</ul>
 <p>&emsp;&emsp;此方法的时间复杂度和deduplicate相同，都为$O(n^{2})$。改进算法，将重复的元素批量删除。</p>
-<ol start="2">
+<ul>
 <li>有序向量去重法二<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">int Vector&lt;T&gt;::uniquify()&#123;</span><br><span class="line">    Rank i = 0, j = 0;</span><br><span class="line">    while(++j &lt; _size)&#123;             //逐一扫描，直至末尾元素</span><br><span class="line">        if(_elem[i] != _elem[j])    //找到两个不同元素后将第i+1元素用j元素覆盖</span><br><span class="line">            _elem[++i] = _elem[j];</span><br><span class="line">    &#125;</span><br><span class="line">    _size = ++i;</span><br><span class="line">    shrink();     //如果有必要截除尾部多余元素</span><br><span class="line">    return j-i;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-</ol>
+</ul>
 <p>&emsp;&emsp;此方法的时间复杂度仅为$O(n)$</p>
-<p>###二分查找</p>
-<p>&emsp;&emsp;随机选择使用二分查找还是Fibonacci查找。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Rank Vector&lt;T&gt;::search(T const &amp; e, Rank lo,Rank hi) const&#123;</span><br><span class="line">    return (rand() % 2) ? binSearch(_elem, e, lo, hi) : fibSearch(_elem, e, lo,hi);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h3><p>&emsp;&emsp;随机选择使用二分查找还是Fibonacci查找。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Rank Vector&lt;T&gt;::search(T const &amp; e, Rank lo,Rank hi) const&#123;</span><br><span class="line">    return (rand() % 2) ? binSearch(_elem, e, lo, hi) : fibSearch(_elem, e, lo,hi);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>&emsp;&emsp;补充：Fibonacci数递归公式为$fib(n)=fib(n-1)+fib(n-2)$，若直接实现公式，此方法的时间复杂度为$O(2^{n})$。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int fib(n)&#123;</span><br><span class="line">    return (2&gt;n) ? n : fib(n-1) + fib(n-2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>&emsp;&emsp;优化方法为：进行动态规划，可以将时间复杂度降为$O(n)$。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">int fib(n)&#123;</span><br><span class="line">    int f = 0;</span><br><span class="line">    int g = 1;</span><br><span class="line">    while(0 &lt; n--)&#123;</span><br><span class="line">        g = g + f;</span><br><span class="line">        f = g - f;</span><br><span class="line">    &#125; </span><br><span class="line">    return g;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>&emsp;&emsp;查找的语义约定：</p>
@@ -206,144 +53,60 @@
 <li>若查找元素小于向量最小元素，则返回lo-1即左哨兵</li>
 <li>若查找元素大于向量最大元素，则返回hi-1即右侧哨兵左邻</li>
 </ul>
-<ol>
+<ul>
 <li>A版本算法<br>&emsp;&emsp;减而治之，以任意元素 x = S[mi]为界，将待查找区间分为三部分，将mi取做向量的中点，且不考虑重复元素。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">static Rank binSearch(T* A, T const &amp; e, Rank lo, Rank hi)&#123;</span><br><span class="line">    while(lo &lt; hi)&#123;</span><br><span class="line">        Rank mi = (lo + hi) &gt;&gt; 1;   //取出lo和hi的中点，&gt;&gt;表示右移一位</span><br><span class="line">        if(e &lt; A[mi])</span><br><span class="line">            hi = mi;</span><br><span class="line">        else if(A[mi] &lt; e)</span><br><span class="line">            lo = mi + 1;</span><br><span class="line">        else</span><br><span class="line">            return mi;</span><br><span class="line">    &#125;</span><br><span class="line">    return -1;      //查找失败，返回-1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-</ol>
+</ul>
 <p>&emsp;&emsp;此方法的时间复杂度为$1.5log(n)$。左右分支的比较次数不等，但递归深度相同，左侧的比较次数较少，右侧的比较次数较多，因此可以调整递归深度，将左侧拉深，右侧变浅，从而减少平均比较次数。因此改进算法，将中点设置为$fib(k-1)-1$。</p>
 <p>&emsp;&emsp;Fib查找：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">static Rank fibSearch(T* A, T const &amp; e, Rank lo, Rank hi)&#123;</span><br><span class="line">    Fib fib(hi -lo);  //创建Fib数列</span><br><span class="line">    while(lo &lt; hi)&#123;</span><br><span class="line">        while(hi - lo &lt; fib.get())   //前向顺序查找，确定Fib(k)-1的轴</span><br><span class="line">            fib.prev()</span><br><span class="line">        Rank mi = lo + fib.get() -1;</span><br><span class="line">        if(e &lt; A[mi]) </span><br><span class="line">            hi = mi;</span><br><span class="line">        else if(A[mi] &lt; e)</span><br><span class="line">            lo = mi + 1;</span><br><span class="line">        else</span><br><span class="line">            return mi;</span><br><span class="line">    &#125;</span><br><span class="line">    return -1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>&emsp;&emsp;设平均查找长度为$a(\lambda )\times log(n)$，在λ在[0,1)范围内，使得平均查找长度有最优值，可以列出:<br>&emsp;&emsp;$a\left (\lambda \right ) \times log\left (n \right ) = \lambda \times [1 + a\left (\lambda \right ) \times log\left (n \lambda \right )]+ \left (1 - \lambda \right )\times \left [ 2 + a\left (\lambda \right ) \times log\left (n \left (1 - \lambda \right ) \right ) \right ]$<br>&emsp;&emsp;整理后可得$\lambda = \varphi = 0.6180339…$时，$a\left ( \lambda  \right )= 1.44420…$达到最优值。</p>
-<ol start="2">
+<ul>
 <li><p>B版本算法<br>&emsp;&emsp;分为两个区间，mi的前驱和后继判断次数都为1。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">template &lt;typename T&gt; static Rank binSearch(T* A, T const &amp; e, Rank lo, Rank hi)&#123;</span><br><span class="line">    while(1 &lt; hi -lo)&#123;      //区间宽度为1时退出循环</span><br><span class="line">        Rank mi = (lo + hi) &gt;&gt; 1;</span><br><span class="line">        (e &lt; A[mi]) ? hi = mi : lo = mi;    //区间划分为[lo, mi)、[mi, hi)</span><br><span class="line">    &#125;</span><br><span class="line">    return (e == A[lo] ? lo : -1;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>C版本算法<br>&emsp;&emsp;为了实现语义规定，在B版本基础上改进，为最终版本。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">template &lt;tempename T&gt; static Rank binSearch(T* A, T const &amp; e, Rank lo, Rank hi)&#123;</span><br><span class="line">    while(lo &lt; hi)&#123;         //区间宽度为0时退出循环</span><br><span class="line">        Rank mi = (lo + hi) &gt;&gt; 1;</span><br><span class="line">        (e &lt; A[mi]) ? hi = mi : lo = mi +1;  //区间划分为[lo, mi)、(mi, hi]</span><br><span class="line">    &#125;</span><br><span class="line">    return --lo;  //lo-1为不大于e的元素的最大秩 </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-</ol>
+</ul>
 <p>&emsp;&emsp;中点的选取可以动态选取，根据$\frac{mi-lo}{hi-lo}\approx \frac{e - A\left [ lo \right ]}{A\left [ hi \right ] - A\left [ lo \right ]}$进行插值查找 ，最终的平均查找次数为$log\left ( log\left ( n \right ) \right )$。<br>&emsp;&emsp;对比普通查找，插值查找的优势不明显，在查找宽度极大或操作成本极高的情况下优势 较为明显。且该方法易受到干扰，需引入乘法及除法的额外计算。</p>
-<ol start="4">
-<li>最终可行方法<br>&emsp;&emsp;通过插值查找缩小查找范围，再进行二分查找。<br>&emsp;&emsp;查找方式选择：</li>
-</ol>
 <ul>
-<li>大规模：插值查找</li>
+<li><p>最终可行方法<br>&emsp;&emsp;通过插值查找缩小查找范围，再进行二分查找。<br>&emsp;&emsp;查找方式选择：</p>
+</li>
+<li><p>大规模：插值查找</p>
+</li>
 <li>中规模：折半查找</li>
 <li>小规模：顺序查找</li>
 </ul>
-<p>##无序向量有序化</p>
-<p>&emsp;&emsp;向量元素有序排列时，计算效率会大大提升，如去重、查找等操作。</p>
-<p>###冒泡排序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">template &lt;typename T&gt; void Veector&lt;T&gt;::bubbleSort(Rank lo, Rank hi)&#123;</span><br><span class="line">        while( !bubble(lo, hi--));     //逐趟扫描交换，直至全序</span><br><span class="line">&#125;</span><br><span class="line">template &lt;typename T&gt; bool Vector&lt;T&gt;::bubble(Rank lo, Rank hi)&#123;</span><br><span class="line">        bool sorted = true;         //整体有序标志</span><br><span class="line">        while (++lo &lt; hi)&#123;           //逐一检查相邻元素，若为逆序则交换</span><br><span class="line">               if(_elem[lo-1]&gt;_elem[lo])&#123;</span><br><span class="line">                     sorted = false;</span><br><span class="line">                     swap(_elem[lo-1], _elem[lo]);</span><br><span class="line">               &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return sorted;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="无序向量有序化"><a href="#无序向量有序化" class="headerlink" title="无序向量有序化"></a>无序向量有序化</h2><p>&emsp;&emsp;向量元素有序排列时，计算效率会大大提升，如去重、查找等操作。</p>
+<h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">template &lt;typename T&gt; void Veector&lt;T&gt;::bubbleSort(Rank lo, Rank hi)&#123;</span><br><span class="line">        while( !bubble(lo, hi--));     //逐趟扫描交换，直至全序</span><br><span class="line">&#125;</span><br><span class="line">template &lt;typename T&gt; bool Vector&lt;T&gt;::bubble(Rank lo, Rank hi)&#123;</span><br><span class="line">        bool sorted = true;         //整体有序标志</span><br><span class="line">        while (++lo &lt; hi)&#123;           //逐一检查相邻元素，若为逆序则交换</span><br><span class="line">               if(_elem[lo-1]&gt;_elem[lo])&#123;</span><br><span class="line">                     sorted = false;</span><br><span class="line">                     swap(_elem[lo-1], _elem[lo]);</span><br><span class="line">               &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return sorted;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>&emsp;&emsp;相应的java代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">public class DataStructure &#123;</span><br><span class="line">    private static boolean sorted = true;</span><br><span class="line">    private static int[] testlist;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        testlist = new int[]&#123;1, 20, 15, 5, 16, 10, 22&#125;;</span><br><span class="line">        int hi = testlist.length;</span><br><span class="line">        int lo = 0;</span><br><span class="line">        while(!bubble(lo, hi--) &amp;&amp; hi &gt; 0);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static boolean bubble(int lo, int hi)&#123;</span><br><span class="line">        while(++lo &lt; hi)&#123;</span><br><span class="line">            if (testlist[lo -1] &gt; testlist[lo])&#123;</span><br><span class="line">                sorted = false;</span><br><span class="line">                int change = testlist[lo];</span><br><span class="line">                testlist[lo] = testlist[lo-1];</span><br><span class="line">                testlist[lo-1] = change;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i=0;i&lt;testlist.length;i++)</span><br><span class="line">            System.out.print(testlist[i] + &quot;\t&quot;);</span><br><span class="line">        System.out.println();</span><br><span class="line">        return sorted;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>&emsp;&emsp;打印结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1    15    5    16    10    20    22    </span><br><span class="line">1    5    15    10    16    20    22    </span><br><span class="line">1    5    10    15    16    20    22    </span><br><span class="line">1    5    10    15    16    20    22    </span><br><span class="line">1    5    10    15    16    20    22    </span><br><span class="line">1    5    10    15    16    20    22    </span><br><span class="line">1    5    10    15    16    20    22</span><br></pre></td></tr></table></figure></p>
 <p>&emsp;&emsp;可以看出在第四次扫描的时候，所有的元素都已经就位，但算法仍然在进行扫描，因此可以根据此算法进行改进，将hi移动到已经就位的元素的开头。</p>
-<p>###并归排序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">template &lt;typename T&gt;</span><br><span class="line">void Vector&lt;T&gt;::mergeSort(Raank lo, Rank hi)&#123;</span><br><span class="line">    if(hi - lo &lt; 2)</span><br><span class="line">        return;</span><br><span class="line">    int mi = (lo + hi) &gt;&gt; 1;</span><br><span class="line">    mergeSort(lo, mi);  //前半段排序</span><br><span class="line">    mergeSort(mi, hi);  //后半段排序</span><br><span class="line">    merge(lo, mi, hi);  //归并</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="并归排序"><a href="#并归排序" class="headerlink" title="并归排序"></a>并归排序</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">template &lt;typename T&gt;</span><br><span class="line">void Vector&lt;T&gt;::mergeSort(Raank lo, Rank hi)&#123;</span><br><span class="line">    if(hi - lo &lt; 2)</span><br><span class="line">        return;</span><br><span class="line">    int mi = (lo + hi) &gt;&gt; 1;</span><br><span class="line">    mergeSort(lo, mi);  //前半段排序</span><br><span class="line">    mergeSort(mi, hi);  //后半段排序</span><br><span class="line">    merge(lo, mi, hi);  //归并</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>&emsp;&emsp;二路归并：将两个有序的序列合并成一个有序序列，S[lo, hi) = S[lo, mi)+S[mi,hi)。时间消耗为O(n)。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">template &lt;typename T&gt; void Vector&lt;T&gt;::merge(Rank lo, Rank hi)&#123;</span><br><span class="line">    T* A = _elem + lo;  //合并后的向量为A[0, hi -lo) = _elem[lo, hi)</span><br><span class="line">    int lb = mi -lo;    //前子向量B[0, lb) = _elem[lo, mi)，为复制的A前半部分的值</span><br><span class="line">    T* B = new T[lb];</span><br><span class="line">    for(Rank i = 0; i &lt;lb; b[i] = A[i++]);</span><br><span class="line">    int lc = hi - mi;   //后子向量C[0, lc) = _elem[mi, hi)，直接指向mi之后</span><br><span class="line">    T* C = _elem + mi;</span><br><span class="line">    for(Rank i = 0, j = 0, k = 0; (j &lt; lb)||(k &lt;lc);)&#123;</span><br><span class="line">        if((j &lt; lb) &amp;&amp; (lc &lt;= k || (B[j] &lt;= C[k]))) //短路求值，当k值越界</span><br><span class="line">            A[i++] = B[j++];</span><br><span class="line">        if((k &lt; lc) &amp;&amp; (lb &lt;= j || (C[k] &lt; B[j])))</span><br><span class="line">            A[i++] = C[k++];</span><br><span class="line">    &#125;</span><br><span class="line">    delete [] B;    //释放临时空间B   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>&emsp;&emsp;判断时可以进行精简：不用考虑C提前耗尽的情况，如果C提前耗尽，将B粘贴到A的末尾。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">for(Rank i = 0, j = 0, k =0; j &lt; lb;)&#123;</span><br><span class="line">    if((k &lt; lc) &amp;&amp; (C[k] &lt; B[j]))</span><br><span class="line">        A[i++] = B[j++];</span><br><span class="line">    if(lc &lt;= k || (B[j] &lt;= C[k]))</span><br><span class="line">        A[i++] = C[k++];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>&emsp;&emsp;java实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">testlist = new int[]&#123;1, 4, 15, 5, 9, 10, 22&#125;;</span><br><span class="line"></span><br><span class="line">    private static void mergeSort(int[] testlist)&#123;</span><br><span class="line">        int mid = testlist.length / 2;</span><br><span class="line">        int[] B = new int[mid];</span><br><span class="line">        for (int i = 0; i &lt; mid ;i++)&#123;</span><br><span class="line">            B[i] = testlist[i];</span><br><span class="line">            System.out.print(B[i] + &quot;\t&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println();</span><br><span class="line">        int[] C = new int[testlist.length - mid];</span><br><span class="line">        for (int i = mid; i &lt; testlist.length; i++) &#123;</span><br><span class="line">            C[i-mid] = testlist[i];</span><br><span class="line">            System.out.print(C[i-mid] + &quot;\t&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println();</span><br><span class="line">        for (int i = 0, j = 0, k = 0; j &lt; mid;)&#123;</span><br><span class="line">            if (k &lt; C.length &amp;&amp; C[k] &lt; B[j])</span><br><span class="line">                testlist[i++] = C[k++];</span><br><span class="line">            if (C.length &lt;= k || B[j] &lt;= C[k])</span><br><span class="line">                testlist[i++] = B[j++];</span><br><span class="line">//            else</span><br><span class="line">//                testlist[i++] = C[k++];</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = 0; i &lt; testlist.length; i++) &#123;</span><br><span class="line">            System.out.print(testlist[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
 <p>&emsp;&emsp;输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1    4    15            //B</span><br><span class="line">5    9    10    22    //C </span><br><span class="line">1    4    5    9    10    15    22     //testList</span><br></pre></td></tr></table></figure></p>
-
-            </div>
-
-            <!-- Post Comments -->
-            
-    <!-- 使用 DISQUS_CLICK -->
-<div id="disqus-comment">
-    <div id="disqus_thread"></div>
-
-<!-- add animation -->
-<style>
-	.disqus_click_btn {
-            line-height: 30px;
-            margin: 0;
-            min-width: 50px;
-            padding: 0 14px;
-            display: inline-block;
-            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-            font-size: 14px;
-            font-weight: 400;
-            text-transform: uppercase;
-            letter-spacing: 0;
-            overflow: hidden;
-            will-change: box-shadow;
-            transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
-            outline: 0;
-            cursor: pointer;
-            text-decoration: none;
-            text-align: center;
-            vertical-align: middle;
-            border: 0;
-            background: rgba(158, 158, 158, .2);
-            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
-            color: #fff;
-            background-color: #7EC0EE;
-            text-shadow: 0
-        }
-</style>
-	
-<div class="btn_click_load" id="disqus_bt"> 
-    <button class="disqus_click_btn">点击查看评论</button>
-</div>
-
-<!--
-<script type="text/javascript">
-$('.btn_click_load').click(function() {
-    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-    var disqus_shortname = 'http-miccall-tech'; // required: replace example with your forum shortname
-
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-
-    document.getElementById('disqus_bt').style.display = "none";
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">NYY</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yoursite.com/2018/04/04/hello-world/">http://yoursite.com/2018/04/04/hello-world/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/数据结构/">数据结构</a><a class="post-meta__tags" href="/tags/C/">C++</a></div><div class="social-share"></div><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script><nav id="pagination"></nav><div id="disqus_thread"></div><script>var disqus_shortname = 'niuyuanyuan'
+var disqus_config = function () {
+  this.page.url = 'http://yoursite.com/2018/04/04/hello-world/';
+  this.page.identifier = '2018/04/04/hello-world/';
+  this.page.title = '数据结构之向量';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + disqus_shortname +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script><script id="dsq-count-src" src="https://niuyuanyuan.disqus.com/count.js" async></script></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2017 - 2018 By NYY</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="/js/third-party/anime.min.js"></script><script src="/js/third-party/jquery.min.js"></script><script src="/js/third-party/jquery.fancybox.min.js"></script><script src="/js/third-party/velocity.min.js"></script><script src="/js/third-party/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.5.1"></script><script src="/js/fancybox.js?version=1.5.1"></script><script src="/js/sidebar.js?version=1.5.1"></script><script src="/js/copy.js?version=1.5.1"></script><script src="/js/fireworks.js?version=1.5.1"></script><script src="/js/transition.js?version=1.5.1"></script><script src="/js/scroll.js?version=1.5.1"></script><script src="/js/head.js?version=1.5.1"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  }
 });
-</script>
--->
-<script type="text/javascript">
-    var disqus_config = function () {
-        this.page.url = 'http://yoursite.com/2018/04/04/hello-world/';  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = 'http://yoursite.com/2018/04/04/hello-world/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-    };
-</script>
-
-<script type="text/javascript">
-    $('.btn_click_load').click(function() {  //click to load comments
-        (function() { // DON'T EDIT BELOW THIS LINE
-            var d = document;
-            var s = d.createElement('script');
-            s.src = '//http-miccall-tech.disqus.com/embed.js';
-            s.setAttribute('data-timestamp', + new Date());
-            (d.head || d.body).appendChild(s);
-        })();
-        $('.btn_click_load').css('display','none');
-    });
-</script>
-</div>
-<style>
-    #disqus-comment{
-        background-color: #eee;
-        padding: 2pc;
-    }
-</style>
-
-
-        </div>
-        <!-- Copyright 版权 start -->
-                <div id="copyright">
-            <ul>
-                <li>&copy;Powered By <a href="https://hexo.io/zh-cn/" style="border-bottom: none;">hexo</a></li>
-                <li>Design: <a href="https://niuyuanyuanna.github.io " style="border-bottom: none;">NYY</a></li>
-            </ul>
-            
-            	<span id="busuanzi_container_site_pv">2018总访问量<span id="busuanzi_value_site_pv"></span>次</span>
-			
-        </div>
-    </div>
-</body>
-
-
-
- 	
-</html>
+</script><script type="text/x-mathjax-config">MathJax.Hub.Queue(function() {
+  var all = MathJax.Hub.getAllJax(), i;
+  for (i=0; i < all.length; i += 1) {
+    all[i].SourceElement().parentNode.className += ' has-jax';
+  }
+});
+</script><script src="https://cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></body></html>
