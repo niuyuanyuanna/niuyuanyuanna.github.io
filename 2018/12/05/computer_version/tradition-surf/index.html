@@ -1,0 +1,80 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="传统图像特征点提取算法"><meta name="keywords" content="计算机视觉,传统图像算法,图像特征点提取"><meta name="author" content="NYY,undefined"><meta name="copyright" content="NYY"><title>传统图像特征点提取算法 | NYY's blog</title><link rel="shortcut icon" href="/img/my_icon.jpg"><link rel="stylesheet" href="/css/index.css?version=1.5.6"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css?version=1.5.6"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#传统图像特征点提取算法"><span class="toc-number">1.</span> <span class="toc-text">传统图像特征点提取算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SIFT与SURF的关系"><span class="toc-number">1.1.</span> <span class="toc-text">SIFT与SURF的关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SIFT算法"><span class="toc-number">1.2.</span> <span class="toc-text">SIFT算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#尺度空间局部极值点定位"><span class="toc-number">1.2.1.</span> <span class="toc-text">尺度空间局部极值点定位</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#尺度空间"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">尺度空间</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#高斯差分"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">高斯差分</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#高斯图像金字塔"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">高斯图像金字塔</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SURF算法过程"><span class="toc-number">1.3.</span> <span class="toc-text">SURF算法过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#构建积分图像"><span class="toc-number">1.3.1.</span> <span class="toc-text">构建积分图像</span></a></li></ol></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.jpg"></div><div class="author-info__name text-center">NYY</div><div class="author-info__description text-center"></div><div class="follow-button"><a href="https://github.com/niuyuanyuanna" target="_blank">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">37</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">30</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">8</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">Links</div><a class="author-info-links__name text-center" href="https://www.ouyangsong.com" target="_blank">欧阳松的博客</a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://github.com/niuyuanyuanna/BlogImages/raw/master/background/computer_version.jpeg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">NYY's blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span></div><div id="post-info"><div id="post-title">传统图像特征点提取算法</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-12-05</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Computer-Version/">Computer Version</a><span class="post-meta__separator">|</span><i class="fa fa-comment-o post-meta__icon" aria-hidden="true"></i><a href="/2018/12/05/computer_version/tradition-surf/#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2018/12/05/computer_version/tradition-surf/"></span></a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">1,799</span><span class="post-meta__separator">|</span><span>Reading time: 6 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="传统图像特征点提取算法"><a href="#传统图像特征点提取算法" class="headerlink" title="传统图像特征点提取算法"></a>传统图像特征点提取算法</h1><p>计算机视觉中，很大一部分研究集中在图像特征提取和特征生成算法上。对图像的优化，不同于一般数学问题的优化方法，图像的优化是对像素点，在某一个小的邻域内，进行特征的提取或者图像的分析，该优化主要是进行局部区域的优化，要寻找<strong>局部极值</strong>，而不像传统的优化算法那样进行全局的优化求解。由于相同物体在不同状态下所产生的图像不同，使得不同图像具有不同亮度，不同旋转方向和不同尺度的差异。想要提取出具有代表性且性质鲁棒的特征点，一直是学术研究的焦点之一。</p>
+<h2 id="SIFT与SURF的关系"><a href="#SIFT与SURF的关系" class="headerlink" title="SIFT与SURF的关系"></a>SIFT与SURF的关系</h2><p><strong>SIFT</strong>（Scale invariant feature Transform）算法是由David Lowe提出的<strong>尺度不变特征转换</strong>算法，其目标是解决低层次特征提取及其图像匹配中的实际问题。该算法是一种基于尺度空间，对图像缩放变换保持不变性的图像局部特征描述子。其主要分为三部分进行图像的特征点提取和描述。</p>
+<p>SIFT算法优点：</p>
+<ul>
+<li>特征稳定，对旋转、尺度变换、亮度保持不变性</li>
+<li>对视角变换、噪声也有一定程度的稳定性</li>
+</ul>
+<p>SIFT算法缺点：</p>
+<ul>
+<li>实时性不高</li>
+<li>对于边缘光滑目标的特征点提取能力较弱，不够优化</li>
+</ul>
+<p>并且。因此，Bay于2006年提出了<strong>SURF</strong>（Speeded Up Robust Features）特征检测算法(发布于ECCV)。该算法具有较好的<strong>尺度不变性</strong>和<strong>旋转不变性</strong>，并且具有快速的计算能力，一直是图像拼接、图像检测和恢复等应用采用的主流算法之一。</p>
+<p>SURF算法是对SIFT算法的加强版本，同时能够加速提取更加鲁棒的特征，是SIFT算子的速度的三倍以上，并且提取出的特征点更有代表性。同时也对描述子的生成以及特征点的匹配进行了优化。其主要采用了<strong>Harr特征</strong>以及<strong>积分图像</strong>，加快了程序搜索和运行的时间，优化了特征点提取的理论算法。</p>
+<h2 id="SIFT算法"><a href="#SIFT算法" class="headerlink" title="SIFT算法"></a>SIFT算法</h2><p>Sift全称尺度不变特征变换，是1999年Lowe提出的，是一种基于尺度空间的，对图像缩放、旋转、甚至仿射变换保持不变性的图像局部特征描述算子。</p>
+<p>SIFT算法流程：</p>
+<ul>
+<li>尺度空间局部极值点定位</li>
+<li>关键点精确定位</li>
+<li>关键点方向确定</li>
+<li>生成特征向量</li>
+</ul>
+<h3 id="尺度空间局部极值点定位"><a href="#尺度空间局部极值点定位" class="headerlink" title="尺度空间局部极值点定位"></a>尺度空间局部极值点定位</h3><p>Sift的特征点是在DOG金字塔尺度空间中提取的，尺度空间的构建涉及到高斯卷积、图像下采样和高斯差分操作。在尺度空间中先初步提取出在尺度空间和二维图像空间上都是局部极值点的兴趣点，再滤除掉能量低的不稳定的和错误的兴趣点，得到最终稳定的特征点。</p>
+<h4 id="尺度空间"><a href="#尺度空间" class="headerlink" title="尺度空间"></a>尺度空间</h4><p>特征点检测需要知道特征点的位置和尺度，因为真实世界中的物体只有在一定的尺度下才有意义，寻找的特征点需要找到连续的尺度空间下位置不发生变化的点。构建尺度空间的目的就是找到在尺度变化中具有不变性的位置，可以使用连续的尺度变化，即在尺度空间中所有可能的尺度变化中找到稳定的特征点，通过这种方式找到的极点可以保证在图像缩放和旋转变化中具有不变性。 </p>
+<p>设$I(x,y)$为原始图像，$G(x,y, \sigma)$是尺度空间可变的高斯函数，则一个图像的尺度空间可以定义为：<br>$$<br>L(x,y,\sigma)=G(x,y,\sigma)∗I(x,y)<br>$$</p>
+<ul>
+<li>$\sigma$表示尺度空间大小。$\sigma$越大，图像越模糊，表示图像概貌；$\sigma$越小，图像越清晰，表示图像细节；</li>
+</ul>
+<p>其中高斯函数定义为：<br>$$<br>G(x,y,\sigma)=\frac{1}{2π\sigma^2}e^{− \frac{(x^2+y^2)}{2\sigma^2}}<br>$$<br>经过一系列的尺度空间变换和二倍的下采样，最终得到高斯金字塔。 </p>
+<p>公式(1)中的图像$I(x,y)$具有无限的分辨率，也就是说他的尺度$σ=0$，即$I(x,y)=L(x,y,0)$。也就是说公式(1)得到的尺度空间图像$L(x,y,\sigma)$是由尺度尺度空间为0的图像$L(x,y,0)$生成的，但是现实生活中是不存在尺度空间为0，即具有无限分辨率的图像的。在Lowe的论文中，他们给定原图一个很小的尺度空间，为0.5。因此由一个小尺度空间图像$L(x,y,\sigma_1)$生成一个大的尺度空间图像$L(x,y,\sigma_2)​$的过程为:<br>$$<br>L(x,y,\sigma _2) = G(x,y,\sqrt{\sigma^2_2 − \sigma^2_1} )∗L(x,y,\sigma _1)<br>$$</p>
+<p>由于实际中尺度为0的图像是无法得到的，因此我们得到的尺度图像的基准图像一定是由公式(3)得到的。</p>
+<h4 id="高斯差分"><a href="#高斯差分" class="headerlink" title="高斯差分"></a>高斯差分</h4><p>为了在尺度空间中找到稳定不变的极值点，在SIFT算法中使用了高斯差分(DOG)函数$D(x,y,\sigma)$，定义为:<br>$$<br>\begin{align<em>}<br>D(x,y,\sigma) &amp;= [D(x,y,k\sigma) - D(x,y,\sigma)]</em>I(x,y)\<br>              &amp;= L(x,y, k\sigma) - L(x, y, \sigma)<br>\end{align*}<br>$$</p>
+<p>其中$kσ$和$σ$是连续的两个图像的平滑尺度，所得到的差分图像在高斯差分金字塔中。 </p>
+<p>选择高斯差分函数的原因：</p>
+<ul>
+<li>计算简单，因为$ L(x, y, \sigma)$可以由上一步计算得到，$D(x,y,\sigma)$只需要进行减法计算</li>
+<li>LoG（Laplacian of Gaussian）高斯拉普拉斯算子，即图像的二阶导数，能够在不同的尺度下检测到图像的斑点特征，从而检测到图像中尺度变化下的位置不动点，但是LoG的运算效率不高</li>
+<li>通过前人的实验证明LoG提取的特征稳定性最强</li>
+</ul>
+<p>而DoG是LoG的近似。DoG和LoG的关系如下述所示：</p>
+<p>$$<br>\begin{align<em>}<br>\sigma \nabla ^2 G &amp;= \frac{\partial G}{\partial \sigma}\<br>&amp;\approx \frac{G(x,y,k\sigma)−G(x,y,\sigma)}{k\sigma−\sigma}<br>\end{align</em>}<br>$$</p>
+<p>因此，有：<br>$$<br>G(x,y,k\sigma)−G(x,y,\sigma) \approx(k-1) \sigma ^2 \nabla ^2 G<br>$$<br>$\sigma ^2 \nabla ^2 G$正是尺度归一化算子的表达形式。在所有的尺度中$k−1$是一个常数，当$k$趋近于1的时候误差趋近于0，但实际上这种误差对于极值的位置检测并没有什么影响 。（==这里不是很懂==）</p>
+<h4 id="高斯图像金字塔"><a href="#高斯图像金字塔" class="headerlink" title="高斯图像金字塔"></a>高斯图像金字塔</h4><p>高斯图像金子塔和差分金字塔如图所示：</p>
+<div align="center"><br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/94956855.jpg" width="90%"><br></div>
+
+
+
+<h2 id="SURF算法过程"><a href="#SURF算法过程" class="headerlink" title="SURF算法过程"></a>SURF算法过程</h2><h3 id="构建积分图像"><a href="#构建积分图像" class="headerlink" title="构建积分图像"></a>构建积分图像</h3><p>在一个特征点$x=(x,y)$的领域上，计算其积分图像$I(x,y)$：<br>$$<br>I_{\Sigma }(x)=\sum_{i=0}^{i \leq x} \sum_{j=0}^{j \leq y}I(i,j)<br>$$</p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">NYY</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yoursite.com/2018/12/05/computer_version/tradition-surf/">http://yoursite.com/2018/12/05/computer_version/tradition-surf/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/计算机视觉/">计算机视觉</a><a class="post-meta__tags" href="/tags/传统图像算法/">传统图像算法</a><a class="post-meta__tags" href="/tags/图像特征点提取/">图像特征点提取</a></div><div class="social-share"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><nav id="pagination"><div class="prev-post pull-left"><a href="/2018/12/06/tensorflow/1.TensorFlow入门/"><i class="fa fa-chevron-left">  </i><span>TensorFlow基础入门</span></a></div><div class="next-post pull-right"><a href="/2018/11/08/computer_version/face-keypoint-detection/"><span>人脸关键点检测</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="disqus_thread"></div><script>var unused = null;
+var disqus_config = function () {
+  this.page.url = 'http://yoursite.com/2018/12/05/computer_version/tradition-surf/';
+  this.page.identifier = '2018/12/05/computer_version/tradition-surf/';
+  this.page.title = '传统图像特征点提取算法';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + 'niuyuanyuan' +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script><script id="dsq-count-src" src="https://niuyuanyuan.disqus.com/count.js" async></script></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2018 By NYY</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="/js/third-party/anime.min.js"></script><script src="/js/third-party/jquery.min.js"></script><script src="/js/third-party/jquery.fancybox.min.js"></script><script src="/js/third-party/velocity.min.js"></script><script src="/js/third-party/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.5.6"></script><script src="/js/fancybox.js?version=1.5.6"></script><script src="/js/sidebar.js?version=1.5.6"></script><script src="/js/copy.js?version=1.5.6"></script><script src="/js/fireworks.js?version=1.5.6"></script><script src="/js/transition.js?version=1.5.6"></script><script src="/js/scroll.js?version=1.5.6"></script><script src="/js/head.js?version=1.5.6"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  }
+});
+</script><script type="text/x-mathjax-config">MathJax.Hub.Queue(function() {
+  var all = MathJax.Hub.getAllJax(), i;
+  for (i=0; i < all.length; i += 1) {
+    all[i].SourceElement().parentNode.className += ' has-jax';
+  }
+});
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></body></html>
