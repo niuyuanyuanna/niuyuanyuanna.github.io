@@ -81,24 +81,32 @@
 </ul>
 </li>
 </ul>
-<h3 id="图像增强"><a href="#图像增强" class="headerlink" title="图像增强"></a>图像增强</h3><h4 id="直方图均衡"><a href="#直方图均衡" class="headerlink" title="直方图均衡"></a>直方图均衡</h4><p>通过灰度变换将一幅图像转换为另一幅具有均衡直方图的图像，即在一定灰度范围内具有相同的象素点数的图像的过程。通过这种方法，亮度可以更好地在直方图上分布。这样就可以用于增强局部的对比度而不影响整体的对比度，直方图均衡化通过有效地扩展常用的亮度来实现这种功能。<br>这种方法对于背景和前景都太亮或者太暗的图像非常有用，这种方法尤其是可以带来X光图像中更好的骨骼结构显示以及曝光过度或者曝光不足照片中更好的细节。这种方法的一个主要优势是它是一个相当直观的技术并且是可逆操作，如果已知均衡化函数，那么就可以恢复原始的直方图，并且计算量也不大。<br>这种方法的一个缺点是它对处理的数据不加选择，它可能会增加背景噪声的对比度并且降低有用信号的对比度。<br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/57057553.jpg" alt=""></p>
-<h4 id="直方图匹配"><a href="#直方图匹配" class="headerlink" title="直方图匹配"></a>直方图匹配</h4><p>直方图规定化（histogram specification）又称直方图匹配，是指使一幅图像的直方图变成规定形状的直方图而对图像进行变换的增强方法。就是通过一个灰度映像函数，将原灰度直方图改造成所希望的直方图。所以，直方图修正的关键就是灰度映像函数。<br>直方图规定化原理是对两个直方图都做均衡化，变成相同的归一化的均匀直方图。以此均匀直方图起到媒介作用，再对参考图像做均衡化的逆运算即可。直方图均衡化是直方图规定化的桥梁。<br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/90622666.jpg" alt=""></p>
+<h3 id="图像增强"><a href="#图像增强" class="headerlink" title="图像增强"></a>图像增强</h3><h4 id="直方图均衡"><a href="#直方图均衡" class="headerlink" title="直方图均衡"></a>直方图均衡</h4><p>通过灰度变换将一幅图像转换为另一幅具有均衡直方图的图像，即在一定灰度范围内具有相同的象素点数的图像的过程。通过这种方法，亮度可以更好地在直方图上分布。这样就可以用于增强局部的对比度而不影响整体的对比度，直方图均衡化通过有效地扩展常用的亮度来实现这种功能。<br>这种方法对于背景和前景都太亮或者太暗的图像非常有用，这种方法尤其是可以带来X光图像中更好的骨骼结构显示以及曝光过度或者曝光不足照片中更好的细节。这种方法的一个主要优势是它是一个相当直观的技术并且是可逆操作，如果已知均衡化函数，那么就可以恢复原始的直方图，并且计算量也不大。<br>这种方法的一个缺点是它对处理的数据不加选择，它可能会增加背景噪声的对比度并且降低有用信号的对比度。</p>
+<div align="center"><br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/57057553.jpg" width="90%"><br></div>
+
+<h4 id="直方图匹配"><a href="#直方图匹配" class="headerlink" title="直方图匹配"></a>直方图匹配</h4><p>直方图规定化（histogram specification）又称直方图匹配，是指使一幅图像的直方图变成规定形状的直方图而对图像进行变换的增强方法。就是通过一个灰度映像函数，将原灰度直方图改造成所希望的直方图。所以，直方图修正的关键就是灰度映像函数。<br>直方图规定化原理是对两个直方图都做均衡化，变成相同的归一化的均匀直方图。以此均匀直方图起到媒介作用，再对参考图像做均衡化的逆运算即可。直方图均衡化是直方图规定化的桥梁。</p>
+<div align="center"><br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/90622666.jpg" width="90%"><br></div>
+
 <h4 id="局部增强"><a href="#局部增强" class="headerlink" title="局部增强"></a>局部增强</h4><p>Local preprocessiong 也称为filtering，根据图像处理的目的分为两类：</p>
 <h5 id="平滑（smoothing）"><a href="#平滑（smoothing）" class="headerlink" title="平滑（smoothing）"></a>平滑（smoothing）</h5><p>使用低通滤波器可以抑制高频成分（sharp image details），使图像变模糊。图像平滑的目的是抑制噪声及图片中的波动，和在频域抑制高频的作用相同。<br>缺点：平滑会损失边缘信息，丢失重要的边界信息。filter尺寸越大，丢失信息越多。</p>
 <ul>
 <li><p>Image Smoothing-Average<strong>均值滤波</strong><br>均值滤波是一种<strong>线性滤波</strong>操作，输出图像的每一个像素是核窗口内输入图像对应像素的像素的平均值( 所有像素加权系数相等)。相当于给图像经过一个$n*n$的卷积核，卷积核的系数都为1。<br>均值滤波算法比较简单，计算速度快，但是均值滤波本身存在着固有的缺陷，即它不能很好地保护图像细节，在图像去噪的同时，也破坏了图像的细节部分，从而使图像变得模糊，不能很好地去除噪声点。但均值滤波对周期性的干扰噪声有很好的抑制作用。</p>
 </li>
 <li><p>Median Filter <strong>中值滤波</strong><br>中值滤波法是一种<strong>非线性平滑技术</strong>，将图像的每个像素用邻域 (以当前像素为中心的正方形区域)像素的<strong>中值</strong>代替 ，常用于消除图像中的<strong>椒盐噪声</strong>。</p>
-<p>与低通滤波不同的是，中值滤波对脉冲噪声有良好的滤除作用，特别是在滤除噪声的同时，<strong>能够保护信号的边缘，使之不被模糊</strong>，但它会洗去均匀介质区域中的纹理。这些优良特性是线性滤波方法所不具有的。<br>中值滤波能减弱或消除傅里叶空间的高频分量，同时也影响低频分量。中值滤波去除噪声的效果依赖于两个要素：邻域的空间范围和中值计算中涉及的像素数。一般说来，小于滤波器面积一半的亮或暗的物体基本上会被滤除，而较大的物体几乎会原封不动地保存下来，因此中值滤波器的空间尺寸必须根据现有的问题来进行调整。<br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/25880713.jpg" alt=""></p>
+<p>与低通滤波不同的是，中值滤波对脉冲噪声有良好的滤除作用，特别是在滤除噪声的同时，<strong>能够保护信号的边缘，使之不被模糊</strong>，但它会洗去均匀介质区域中的纹理。这些优良特性是线性滤波方法所不具有的。<br>中值滤波能减弱或消除傅里叶空间的高频分量，同时也影响低频分量。中值滤波去除噪声的效果依赖于两个要素：邻域的空间范围和中值计算中涉及的像素数。一般说来，小于滤波器面积一半的亮或暗的物体基本上会被滤除，而较大的物体几乎会原封不动地保存下来，因此中值滤波器的空间尺寸必须根据现有的问题来进行调整。</p>
 </li>
-<li><p>Maximum and Minimum Filters极大极小滤波器<br>极大值极小值滤波器是两个串联滤波器，可以用于消除椒盐噪声。极大值滤波器移除pepper-type（小值）噪声，极小值滤波器移除salt-type（大值）噪声。</p>
-</li>
+</ul>
+<div align="center"><br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/25880713.jpg" width="90%"><br></div>
+
+<ul>
+<li>Maximum and Minimum Filters极大极小滤波器<br>极大值极小值滤波器是两个串联滤波器，可以用于消除椒盐噪声。极大值滤波器移除pepper-type（小值）噪声，极小值滤波器移除salt-type（大值）噪声。</li>
 </ul>
 <h5 id="锐化（sharpening）"><a href="#锐化（sharpening）" class="headerlink" title="锐化（sharpening）"></a>锐化（sharpening）</h5><p>使用高通滤波器可以抑制低频成分，锐化图像的边缘，增强图片细节</p>
 <ul>
 <li>Derivative operators <strong>差分滤波器</strong><br>一阶微分：$\frac{\partial f}{\partial x}= f(x+1) - f(x)$<br>一阶微分会产生较粗的边缘，因为沿着斜坡的积分非零。主要检测极值。<br>二阶微分：$\frac{\partial ^{2} f}{\partial x^{2}}= f(x+1) + f(x-1) -2f(x)$<br>二阶微分在增强细节方面要比一阶微分好得多，这是一个适合锐化图像的理想特性。因此常用二阶微分来进行图像增强。典型的二阶微分算子是<strong>拉普拉斯算子</strong>：<br>$$<br>\triangledown^{2}f=\frac{\partial ^{2} f}{\partial x^{2}}+\frac{\partial ^{2} f}{\partial y^{2}}<br>$$<br>$$<br>\frac{\partial ^{2} f}{\partial x^{2}}= f(x+1,y) + f(x-1,y) -2f(x,y)<br>$$<br>$$<br>\frac{\partial ^{2} f}{\partial x^{2}}= f(x,y+1) + f(x,y-1) -2f(x,y)<br>$$<br>$$<br>\triangledown^{2}f= f(x+1,y) + f(x-1,y) + f(x,y+1) + f(x,y-1)-4f(x,y)<br>$$</li>
 </ul>
-<p><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/20812166.jpg" alt=""></p>
+<div align="center"><br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/20812166.jpg" width="90%"><br></div>
+
 <p>由于拉普拉斯是一种微分算子，因此其应用强调的是图像中的灰度突变，并不强调灰度级缓慢变化的区域。<br>将原图像和拉普拉斯图像叠加在一起的简单方法，可以复原背景特性并保持拉普拉斯锐化处理的效果。<br>$$<br>g(x,y) = f(x,y) + \triangledown^{2}f(x, y)<br>$$<br>如果所使用的模板定义有负的中心系数，那么必须将原图像减去经拉普拉斯变换后的图像，而不是加上他，从而得到锐化后的结果。</p>
 <ul>
 <li>High-boost Filter<strong>高频提升滤波器</strong></li>
@@ -106,7 +114,8 @@
 <p>高通滤波后的图像= 原图-低通滤波后的图像<br>$$<br>\begin{equation}<br>\begin{aligned}<br>Hight-boost &amp; = A \times original - lowpass(blurred) \<br>&amp; = A \times original - lowpass(blurred) \<br>&amp; = (A-1) \times original + original - lowpass(blurred)<br> \end{aligned}<br>\end{equation}<br>$$<br>当$A=1$时，为标准的高通滤波器，</p>
 <p>当$A &gt; 1$时，部分原图抵消了高通滤波部分，保留了低频部分。</p>
 <p>高频提升滤波器是图像处理的基础工具，常用于印刷出版业。</p>
-<p><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/2387564.jpg" alt=""></p>
+<div align="center"><br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/2387564.jpg" width="90%"><br></div>
+
 <p>带通滤波器移除选择的频带，用于图像重建，不用于图像增强</p>
 <ul>
 <li>卷积和相关</li>
@@ -115,29 +124,34 @@
 <h4 id="频域增强"><a href="#频域增强" class="headerlink" title="频域增强"></a>频域增强</h4><h5 id="傅里叶变换（FT）"><a href="#傅里叶变换（FT）" class="headerlink" title="傅里叶变换（FT）"></a>傅里叶变换（FT）</h5><p>$$<br>\mathfrak{F}(f(x))= \int_{-\infty }^{+\infty}f(x)\cdot e^{-j2\pi ux}dx<br>$$</p>
 <p>反变换：<br>$$<br>\mathfrak{F}  ^{-1} (F(u) ) = \int_{-\infty }^{+\infty}F(u)\cdot e^{j2\pi ux}du<br>$$<br>离散傅里叶变化可以分为实数部分和虚数部分：<br>$$<br>\begin{equation}<br>\begin{aligned}<br>F(u) &amp;= \frac{1}{M}\sum_{x=0}^{M-1}f(x)[cos\frac{2\pi ux}{M} - jsin\frac{2\pi ux}{M}]\<br>&amp;=R(u)+jI(u)\<br>&amp;=\left | F(u) \right |e^{-j\varphi (u)}<br> \end{aligned}<br>\end{equation}<br>$$<br>其中幅值和相位分别为：<br>$$<br>\left | F(u) \right | =\sqrt{ R^{2}(u)+I^{2}(u)}\<br>\varphi (u)=arctan()\frac{I(u)}{R(u)}\<br>P(u) = \left | F(u) \right |^{2} = R^{2}(u)+I^{2}(u)<br>$$<br>时域位移和频域位移的对应关系：<br>$$<br>f(x,y)e^{j2\pi (\frac{u_{0}x}{M} + \frac{v_{0}y}{N})}\Leftrightarrow F(u-u_{0}, v-v_{0})\<br>f(x-x_{0}, y-y_{0}) \Leftrightarrow F(u,v)e^{-j2\pi (\frac{u_{0}x}{M} + \frac{v_{0}y}{N})}<br>$$<br>也即是在时域移动$(x_{0},y_{0})$，对应频域上是幅值不变，相位移动。</p>
 <p>频域增强操作：</p>
-<p><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/34598712.jpg" alt=""></p>
+<div align="center"><br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/34598712.jpg" width="90%"><br></div>
+
 <p>频域滤波器分类：</p>
 <ul>
 <li>低通滤波器：图像模糊、平滑——例如巴特沃斯滤波器、高斯低通滤波器</li>
 <li>高通滤波器：增大高频幅值，对应锐化操作——巴特沃斯高通滤波器、高斯高通滤波器</li>
 </ul>
 <h6 id="Butterworth低通滤波器"><a href="#Butterworth低通滤波器" class="headerlink" title="Butterworth低通滤波器"></a>Butterworth低通滤波器</h6><p>$$<br>H(u,v)=\frac{1}{1+(\frac{D(u,v)}{D_{0}})^{2n}}<br>$$</p>
-<p><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/55623921.jpg" alt=""></p>
+<div align="center"><br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/55623921.jpg" width="90%"><br></div>
+
 <ul>
 <li>n越大，Butterworth低通滤波器越接近于理想低通滤波器，但会出现振铃效应</li>
 <li>其有3db不变性</li>
 <li>有平坦性</li>
 </ul>
 <h6 id="Gaussian低通滤波器"><a href="#Gaussian低通滤波器" class="headerlink" title="Gaussian低通滤波器"></a>Gaussian低通滤波器</h6><p>$$<br>H(u,v)=e^{\frac{-D^{2}(u,v)}{2\sigma ^{2}}}<br>$$</p>
-<p><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/13819824.jpg" alt=""></p>
+<div align="center"><br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/13819824.jpg" width="90%"><br></div>
+
 <ul>
 <li>$D_{0}$越小，越接近理想低通滤波器</li>
 </ul>
 <p>低通滤波器应用：平滑印刷字体</p>
-<p><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/90373906.jpg" alt=""></p>
+<div align="center"><br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/90373906.jpg" width="90%"><br></div>
+
 <h6 id="Butterworth高通滤波器"><a href="#Butterworth高通滤波器" class="headerlink" title="Butterworth高通滤波器"></a>Butterworth高通滤波器</h6><p>$$<br>H_{hp}(u,v)=1-H_{lp}{(u,v)}\<br>H(u,v)=\frac{1}{1+(\frac{D_{0}}{D(u,v)})^{2n}}<br>$$</p>
 <p>和低通滤波器正好相反。增加一个常数项保存低频部分信息。</p>
-<p><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/50235930.jpg" alt=""></p>
+<div align="center"><br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/50235930.jpg" width="90%"><br></div>
+
 <h6 id="Gaussian高通滤波器"><a href="#Gaussian高通滤波器" class="headerlink" title="Gaussian高通滤波器"></a>Gaussian高通滤波器</h6><p>$$<br>H(u,v)=1-e^{\frac{-D^{2}(u,v)}{2\sigma ^{2}}}<br>$$</p>
 <p>$\sigma = D_{0}$是cutoff频率</p>
 <h5 id="频域拉普拉斯变换"><a href="#频域拉普拉斯变换" class="headerlink" title="频域拉普拉斯变换"></a>频域拉普拉斯变换</h5><p>时域微分对应傅里叶变换为频域乘上$(ju)$：<br>$$<br>F[\frac{d^{n}f(x)}{dx^{n}}] = (ju)^{n}F(u)\<br>F[\frac{\partial ^{2}f(x,y)}{\partial x^{2}}+\frac{\partial ^{2}f(x,y)}{\partial y^{2}}] =- (u^{2}+v^{2})F(u,v)<br>$$<br>因此Laplacian可以看做是使用$H(u,v) = -(u^{2}+v^{2})$的滤波器。</p>
@@ -148,7 +162,8 @@
 <h6 id="Hight-frequency-emphasis-filtering"><a href="#Hight-frequency-emphasis-filtering" class="headerlink" title="Hight frequency emphasis filtering"></a>Hight frequency emphasis filtering</h6><p>$$<br>H_{hfe}(u,v)=a+bH_{hp}{(u,v)}<br>$$</p>
 <h4 id="高斯金字塔"><a href="#高斯金字塔" class="headerlink" title="高斯金字塔"></a>高斯金字塔</h4><p>高斯金字塔背后的理论基础为尺度空间理论。 这个的概念可以用在任意维度的信号中，不过最常用的地方还是在二维的影像信号上，以二维影像信号作为主要讨论对象。 给定一张图片$ f(x,y)$它的尺度空间表示方式$ L(x,y;t)$定义为:影像信号$f(x,y)$和高斯函数$g(x,y;t)={\frac {1}{2{\pi }t}}e^{-(x^{2}+y^{2})/2t}$的卷积，完整公式为：<br>$$<br>L(x,y;t)=g(x,y;t)*f(x,y)<br>$$<br>式中的分号代表卷积的对象为 $x,y$而分号右边的$t$表示定义的尺度大小。 这个定义当$ t\geq 0$ 时对于所有的$t$都会成立，不过通常在实际操作时只会选取特定的$t$值。 其中$t$为高斯函数的变异数。当$t$趋近于零的时候，$g$成为一个单位脉冲响应，使得$ L(x,y;t)\ =f(x,y)$ ，这代表当 $t=0$的时候我们可以把这项操作视为图片$f$本身。 当$t$增加时，$L$代表将影像$f$通过一个较大的高斯滤波器，从而使得影像的细节被去除更多。</p>
 <p>在建立高斯金字塔的时候，首先会将影像转换为尺度空间的表示方式，亦即乘上不同大小的高斯函数，之后再依据取定的尺度向下取样。 乘上的高斯函数大小和向下取样的频率通常会选为2的幂次，也就是说，在每次迭代的过程中，影像都会被乘上一个固定大小的高斯函数，并且被以长宽各0.5的比率被向下取样。 如果将向下取样过程的图片一张一张叠在一起，会呈现一个金字塔的样子，因此这个过程称为高斯金字塔。 </p>
-<p><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/98042535.jpg" alt=""></p>
+<div align="center"><br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/98042535.jpg" width="75%"><br></div>
+
 <p>高斯金字塔使用：</p>
 <ul>
 <li>如果物体的尺寸很小或者说对比度不高，通常则需要采用较高的分辨率来观察。</li>
@@ -157,11 +172,12 @@
 </ul>
 <h4 id="同态滤波器（Homomorphic-Filter）"><a href="#同态滤波器（Homomorphic-Filter）" class="headerlink" title="同态滤波器（Homomorphic Filter）"></a>同态滤波器（Homomorphic Filter）</h4><p>对于一副图像$f(x,y)$可由照射分量$i(x,y)$和反射分量$r(x,y)$的乘积，即<br>$$<br>f(x,y)=i(x,y)*r(x,y)<br>$$<br>由于照度相对变化很小，可以看作是图像的低频成份，而反射率则是高频成份。通过分别处理照度和反射率对像元灰度值的影响，达到揭示阴影区细节特征的目的。 </p>
 <p>上式不能直接用于对照度和反射的频率分量进行操作，因此上式取对数  :<br>$$<br>Inf(x,y)=lni(x,y)+lnr(x,y)<br>$$<br>对上式两边取傅里叶变换：<br>$$<br>\mathfrak{F}(Inf(x,y) )=\mathfrak{F} (Ini(x,y) )+\mathfrak{F}  (Inr(x,y) )<br>$$<br>图像的照射分量通常由慢的空间变化来表征，而反射分量往往引起突变，特别是在不同物体的连接部分。这些特性导致图像取对数后的傅里叶变换的低频成分与照射相联系，而高频成分与反射相联系。  </p>
-<p><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/672660.jpg" alt=""></p>
+<div align="center"><br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/672660.jpg" width="50%"><br></div>
+
 <p>使用同态滤波器可以更好地控制照射分量和反射分量。这种控制器需要指定一个滤波器函数$H(u,v)$，它可用不同的可控方法影响傅里叶变换的低频和高频。如果$γL$和$γH$选定，而$γL&lt;1$且$γH&gt;1$，那么滤波器函数趋近于衰减低频（照射）的贡献，而增强高频反射的贡献。最终结果是同时进行动态范围抑制低频，增强对比度。  </p>
 <p>使用同态滤波器步骤：</p>
-<p><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/62116892.jpg" alt=""></p>
-<p><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/56382828.jpg" alt=""></p>
+<div align="center"><br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/62116892.jpg" width="50%"><br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/56382828.jpg" width="50%"><br></div>
+
 <p>同态滤波是一个比较经典的算法，有论文说可以去雾。但对水中图像效果确是极好的。另外同态滤波主要用于预处理阶段去除光照不均的影响，这用顶帽变化也可以的。 </p>
 <h3 id="图像重建"><a href="#图像重建" class="headerlink" title="图像重建"></a>图像重建</h3><p>目标：</p>
 <ul>
