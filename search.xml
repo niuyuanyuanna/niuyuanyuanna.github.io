@@ -3,7 +3,32 @@
   
     
     <entry>
-      <title></title>
+      <title>IDT算法论文笔记</title>
+      <link href="/2019/01/02/computer_version/IDT/"/>
+      <url>/2019/01/02/computer_version/IDT/</url>
+      <content type="html"><![CDATA[<h1 id="Action-Recognition-with-Improved-Trajectories论文笔记"><a href="#Action-Recognition-with-Improved-Trajectories论文笔记" class="headerlink" title="Action Recognition with Improved Trajectories论文笔记"></a>Action Recognition with Improved Trajectories论文笔记</h1><p>论文原文地址<a href="https://ieeexplore.ieee.org/abstract/document/6751553/" target="_blank" rel="noopener">Action Recognition with Improved Trajectories</a></p><p>前面一篇介绍了DT算法，iDT算法在此基础上进行改进，基本框架和DT算法相同，主要引入了对背景光流的消除，使得特征更集中于对人的运动描述。特征正则化的方式及特征的编码方式也发生了改变。</p><h2 id="相机运动估计"><a href="#相机运动估计" class="headerlink" title="相机运动估计"></a>相机运动估计</h2><p>首先是最重要的一处改进，通过相机运动估计来消除背景光流以及轨迹。首先看DT算法中在没消除背景干扰时的轨迹分布。</p><div align="center"><br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/IDT.png" width="50%"><br></div><p>由于相机在运动，所以背景上也有很多轨迹，人的轨迹会受到相机运动的影响，而这些信息与要识别的动作关系不大，属于干扰信息，因此希望能够识别并消除这些轨迹。实际上轨迹的运动也是通过计算光流信息进行计算的，因此需要通过估计相机运动，来消除背景区域的光流。</p><p>由于相邻两帧图像之间变化很小，iDT算法假设相邻的两帧图像之间的关系可以用一个投影变换矩阵来描述，即后一帧图像是前一帧图像通过投影变换得到的。因此，估计相机运动的问题就变成了利用前后帧图像计算投影变换矩阵的问题。</p><p>为了准确得估计投影变换，iDT算法中采用两种方法获得匹配点对，分别为SURF特征以及光流特征。在获得匹配点对后，利用RANSAC算法估计投影变换矩阵。具体操作为：记$t$时刻和$t+1$时刻的灰度图像分别为$I_t$和$I_{t+1}$,用两张图像计算得到投影变换矩阵$H$（$I_{t+1} = H \times I_t$）。然后用$H$的逆对$I_{t+1}$进行变换（warp），即:<br>$$<br>I_{t+1}^{wrap} = H^{-1} \times I_{t+1}<br>$$<br>$I_{t+1}^{wrap}$：假设不存在相机运动时$t+1$时刻的图像</p><p>用$I_t$和I$I_{t+1}^{wrap}$就可以计算得到优化过的光流。</p><p>图像中人的动作可能比较显著，人身上的匹配点对会使得投影矩阵的估计不准确。因此iDT算法中使用一个huaman detector检测人的位置框，并去除该框中的匹配点对。从而使得人的运动不影响投影矩阵的估计。iDT中使用的是当时效果最好的human detector，其文章为”Weakly supervised learning of interactions between humans and objects”。而现在物体检测领域已经完全被深度学习攻陷了，比较好的方法包括faster-rcnn,ssd等算法。</p>]]></content>
+      
+      <categories>
+          
+          <category> Computer Version </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 计算机视觉 </tag>
+            
+            <tag> Action Recognition </tag>
+            
+            <tag> 论文笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>C3D论文笔记</title>
       <link href="/2018/12/27/computer_version/C3D/"/>
       <url>/2018/12/27/computer_version/C3D/</url>
       <content type="html"><![CDATA[<h1 id="learning-Spatiotemporal-feature-with-3DConvolutional-Networks论文笔记"><a href="#learning-Spatiotemporal-feature-with-3DConvolutional-Networks论文笔记" class="headerlink" title="learning Spatiotemporal feature with 3DConvolutional Networks论文笔记"></a>learning Spatiotemporal feature with 3DConvolutional Networks论文笔记</h1><p>C3D网络来自于<a href="https://arxiv.org/abs/1412.0767" target="_blank" rel="noopener">learning Spatiotemporal feature with 3DConvolutional Networks</a>这篇文章，发表于ICCV2015，主要贡献为三个方面：</p><ol><li>相对于2D卷积，3D卷积更适合学习时空特征</li><li>对于3D卷积，所有卷积层均使用$3<em>3</em>3$的小卷积核计算效果更好</li><li>将学习得到的特征命名为C3D，再与小的线性分类器组合，在4个不同的基准上优于现有的方法，并在其他2个基准上与目前最好的方法相当。</li></ol><p>3D ConvNets在之前的文章就被提出，该方法使用人体检测器和头部跟踪来分割视频中的人物。分割后的视频作为3D ConvNets的输入来进行动作的分类。相比之下，本文将完整的视频帧作为输入，并且不依赖于任何预处理，容易地扩展到大型数据集。</p><h2 id="3D-ConveNets"><a href="#3D-ConveNets" class="headerlink" title="3D ConveNets"></a>3D ConveNets</h2><p>这篇论文旨在探索3D ConvNets在大规模监督训练数据集和现代深度架构的情况下来获取不同类型视频分析任务的最佳表现。主要工作是如何构建3D ConvNets来学习时空特征，这一块主/要介绍了网络架构以及参数的设定、探索核的最佳时序深度、数据集以及训练的超参数设置。根据不同的任务，在不同测试集上进行了实验和对比，如Action recognition、Action Similarity Labeling（行为相似度标注）、Scene and Object Recognition。</p><h3 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h3><p>在3D ConvNets中，卷积和池化操作在时空上执行，而2D ConvNets中，仅在空间上完成。一张图像输入到2D卷积中，将输出一张对应的图像，若为多张图像，就可以将多张图像视为不同的通道，仍然输出一张对应图像，因此，2D ConvNets在每次卷积运算之后就会丢失时间信息。</p><div align="center"><br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/C3D.png" width="100%"><br></div><p>只有3D卷积才能保留输入信号的时间信息，从而产生输出，保留时间信息。</p><p>将输入的视频训练样本定义为：$c<em>l</em>h<em>w$，其中$c$是通道数，$l$是帧数，$h$ 、$w$分别为输入视频的高和宽，卷积核尺寸为$d</em>k<em>k$，其中$d$为卷积核深度，</em>k<em>为大小。网络输入视频的宽高调整为$3</em>16<em>128</em>171$。</p><p>网络由5个（卷积层 + 池化层）、2个全连接层、1个softmax层构成。</p><p><div align="center"><br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/C3DArchitecture.png" width="100%"><br></div><br>所有池化层采用max pooling且核的大小为$2<em>2</em>2$（第一层除外，为了不过早的合并时间信号）</p><h3 id="C3D特征描述"><a href="#C3D特征描述" class="headerlink" title="C3D特征描述"></a>C3D特征描述</h3><p>C3D特征可作为其他视频分析任务的特征。提取C3D特征的方法为：将视频分割为16帧长的片段，overlap为8帧，将视频片段输入到C3D网络中，提取fc6输出的4096维特征。C3D有选择性的提取到了外观和运动。C3D特征高效、简单、紧凑。</p>]]></content>
@@ -31,7 +56,7 @@
       <title>scnn论文笔记</title>
       <link href="/2018/12/24/computer_version/scnn/"/>
       <url>/2018/12/24/computer_version/scnn/</url>
-      <content type="html"><![CDATA[<h1 id="Temporal-action-localization-in-untrimmed-videos-via-multi-stage-cnns论文笔记"><a href="#Temporal-action-localization-in-untrimmed-videos-via-multi-stage-cnns论文笔记" class="headerlink" title="Temporal action localization in untrimmed videos via multi-stage cnns论文笔记"></a>Temporal action localization in untrimmed videos via multi-stage cnns论文笔记</h1><p><a href="http://dvmmweb.cs.columbia.edu/files/dvmm_scnn_paper.pdf" target="_blank" rel="noopener">Temporal action localization in untrimmed videos via multi-stage cnns</a>是Zheng Shou发表在在CVPR2016上的论文，主要解决视频识别中的两个问题：</p><ul><li>Action Recognition：目的为判断一个已经分割好的短视频片段的类别。特点是简化了问题，一般使用的数据库都先将动作分割好了，一个视频片断中包含一段明确的动作，时间较短（几秒钟）且有唯一确定的label。所以也可以看作是输入为视频，输出为动作标签的多分类问题。常用数据库包括UCF101，HMDB51等。</li><li>Temporal Action Location：不仅要知道一个动作在视频中是否发生，还需要知道动作发生在视频的哪段时间（包括开始和结束时间）。特点是需要处理较长的，未分割的视频。且视频通常有较多干扰，目标动作一般只占视频的一小部分。常用数据库包括THUMOS2014/2015, ActivityNet等。</li></ul><p>这篇文章主要解决Temporal Action Localization的问题。SCNN指segment based CNN,即基于视频片段的CNN网络。</p><p>SCNN主要包括三个部分：</p><ol><li>多尺度视频片段生成</li><li>动作分类网络</li><li>分类网络微调</li></ol><p>阅读论文之前可以阅读iDT论文</p><h2 id="网络模型"><a href="#网络模型" class="headerlink" title="网络模型"></a>网络模型</h2><div align="center"><br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/SCNN.png" width="100%"><br></div><p>使用的每一段视频标注为$\Psi = {  (\psi_m, \psi_m^{‘} , k_m ) }_{m = 1}^M $，其中$\psi_m$为动作起始时间，$\psi^{‘}_m$为动作终止时间，$k_m$为该动作的id。$k_m \in { 1,2,…,K }$，$K$为动作的种类。在训练过程中共有两种视频，一种是修剪过的视频$X \in \mathbb{T}$，对于修剪过的视频$\psi_m = 1$， $\psi_m^{‘} = T$  ，$M=1$；另一种是未修剪的视频$X \in \mathbb{U}$</p><h3 id="多尺度视频片段生成"><a href="#多尺度视频片段生成" class="headerlink" title="多尺度视频片段生成"></a>多尺度视频片段生成</h3><p>第一步为生成候选的视频片段，作为下一阶段网络的输入。</p><p>首先将每一帧视频resize到$171*128$像素大小，对于未修剪过的视频，使用滑窗的方法产生视频片段，包括多个长度帧的片段：16,32,64,128,256,512。视频帧的重复度为75%。对于每一个未修剪视频，得到一系列视频片段：$\Phi={ (s_h, \phi_h, \phi_h^{‘} ) }^H_{h = 1}$，其中$H$是滑窗的个数，$\phi_h$和$\phi_h^{‘}$是第$h$个片段$s_h$的起始时间和终止时间。</p><p>在得到视频片段后，对其进行平均采样16帧视频，从而使得输出的segment的长度均为16。</p><h3 id="C3D网络"><a href="#C3D网络" class="headerlink" title="C3D网络"></a>C3D网络</h3><p>C3D网络来自于<a href="https://arxiv.org/abs/1412.0767" target="_blank" rel="noopener">learning Spatiotemporal feature with 3DConvolutional Networks</a>这篇文章，前面的博客介绍过C3D网络及特征。</p><h3 id="Proposal-Network"><a href="#Proposal-Network" class="headerlink" title="Proposal Network"></a>Proposal Network</h3><p>在生成训练数据时，同时还记录和segment和ground truth instance之间的最大重叠度（IoU)。对于proposal网络来说，将最大IoU大于0.7的标记为true，最大IoU小于0.3的标记为背景。以及类别（即如果存在多个重叠的ground truth,取重叠度最大的那个）。</p><p>将得到的所有片段输入到C3D网络中，经过fc8后分为两类，即判断是否为背景，训练时将IoU大于0.7的作为正样本（动作），小于0.3的作为负样本（背景），对负样本进行采样使得正负样本比例均衡。采用softmax loss进行训练。proposal network的主要作用是去除一些背景片段。</p><h3 id="Classification-Network"><a href="#Classification-Network" class="headerlink" title="Classification Network"></a>Classification Network</h3><p>经过Proposal Network后，背景被去除，对剩下的数据进行$K$个类别的动作分类。</p><p>和Proposal Network类似，经过fc8后输出$K+1$类，其中一类是背景<br>输出为K+1个类别（包括背景类）的分数, 这个网络被用来初始化localization network, 仅在训练阶段使用，在测试阶段不使用。训练时同样将IoU大于0.7的作为正样本（K类动作），小于0.3的作为背景类，对背景类动作进行采样使得背景类动作的数量和K类动作数量的平均值相近。训练时同样采用softmax loss。</p><h3 id="Localization-Network"><a href="#Localization-Network" class="headerlink" title="Localization Network"></a>Localization Network</h3><p>在估计动作的起始位置时，需要抑制与groundtruth重叠部分很小的片段，增强重叠部分大的片段，如下面图中的B片段才是真正需要保留的，AC应该去除。</p><p><div align="center"><br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/LocalizationNetwork.png" width="60%"><br></div><br>为了达到这样的目标，在loss function增加了overlap的损失。在一个minibatch中，有N个训练样本${ (s_n, k_n, v_n) }_{n = 1}^N$，对于第n个片段，fc8的输出向量为$O_n$，经过softmax后得到的预测结果为$P_n$，计算方式为：<br>$$<br>P_n^{(i)} = \frac{e^{O_n^{(i)}}}{\sum_{j=1}^N e^{O_n^{(i)}}}<br>$$<br>新的loss function为：<br>$$<br>L = L_{softmax} + \lambda \cdot L_{overlap}<br>$$<br>其中softmax损失函数为：<br>$$<br>L_{softmax} = \frac{1}{N} \sum_n(-log(P_n^{k_n}))<br>$$<br>是动作分类的损失函数，overlap的损失函数为：<br>$$<br>L_{overlap} = \frac{1}{N}\sum_n(\frac{1}{2} \cdot (\frac{(P_n^{k_n})^2}{(v_n)^\alpha} -1) \cdot [k_n &gt; 0])<br>$$<br>这里的$k_n &gt;0$表示$[k_n &gt;0] = 1$时，该片段是动作，$[k_n &gt;0] = 0$时，该片段是背景。$L_{overlap}$主要是为了增强与GT有很大重合度的片段的得分，抑制重合度较低的片段。</p>]]></content>
+      <content type="html"><![CDATA[<h1 id="Temporal-action-localization-in-untrimmed-videos-via-multi-stage-cnns论文笔记"><a href="#Temporal-action-localization-in-untrimmed-videos-via-multi-stage-cnns论文笔记" class="headerlink" title="Temporal action localization in untrimmed videos via multi-stage cnns论文笔记"></a>Temporal action localization in untrimmed videos via multi-stage cnns论文笔记</h1><p><a href="http://dvmmweb.cs.columbia.edu/files/dvmm_scnn_paper.pdf" target="_blank" rel="noopener">Temporal action localization in untrimmed videos via multi-stage cnns</a>是Zheng Shou发表在在CVPR2016上的论文，主要解决视频识别中的两个问题：</p><ul><li>Action Recognition：目的为判断一个已经分割好的短视频片段的类别。特点是简化了问题，一般使用的数据库都先将动作分割好了，一个视频片断中包含一段明确的动作，时间较短（几秒钟）且有唯一确定的label。所以也可以看作是输入为视频，输出为动作标签的多分类问题。常用数据库包括UCF101，HMDB51等。</li><li>Temporal Action Location：不仅要知道一个动作在视频中是否发生，还需要知道动作发生在视频的哪段时间（包括开始和结束时间）。特点是需要处理较长的，未分割的视频。且视频通常有较多干扰，目标动作一般只占视频的一小部分。常用数据库包括THUMOS2014/2015, ActivityNet等。</li></ul><p>这篇文章主要解决Temporal Action Localization的问题。SCNN指segment based CNN,即基于视频片段的CNN网络。</p><p>SCNN主要包括三个部分：</p><ol><li>多尺度视频片段生成</li><li>动作分类网络</li><li>分类网络微调</li></ol><p>阅读论文之前可以阅读iDT论文</p><h2 id="网络模型"><a href="#网络模型" class="headerlink" title="网络模型"></a>网络模型</h2><div align="center"><br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/SCNN.png" width="100%"><br></div><p>使用的每一段视频标注为$\Psi = {  (\psi_m, \psi_m^{‘} , k_m ) }_{m = 1}^M $，其中$\psi_m$为动作起始时间，$\psi^{‘}_m$为动作终止时间，$k_m$为该动作的id。$k_m \in { 1,2,…,K }$，$K$为动作的种类。在训练过程中共有两种视频，一种是修剪过的视频$X \in \mathbb{T}$，对于修剪过的视频$\psi_m = 1$， $\psi_m^{‘} = T$  ，$M=1$；另一种是未修剪的视频$X \in \mathbb{U}$</p><h3 id="多尺度视频片段生成"><a href="#多尺度视频片段生成" class="headerlink" title="多尺度视频片段生成"></a>多尺度视频片段生成</h3><p>第一步为生成候选的视频片段，作为下一阶段网络的输入。</p><p>首先将每一帧视频resize到$171*128$像素大小，对于未修剪过的视频，使用滑窗的方法产生视频片段，包括多个长度帧的片段：16,32,64,128,256,512。视频帧的重复度为75%。对于每一个未修剪视频，得到一系列视频片段：$\Phi={ (s_h, \phi_h, \phi_h^{‘} ) }^H_{h = 1}$，其中$H$是滑窗的个数，$\phi_h$和$\phi_h^{‘}$是第$h$个片段$s_h$的起始时间和终止时间。</p><p>在得到视频片段后，对其进行平均采样16帧视频，从而使得输出的segment的长度均为16。</p><h3 id="C3D网络"><a href="#C3D网络" class="headerlink" title="C3D网络"></a>C3D网络</h3><p>C3D网络来自于<a href="https://arxiv.org/abs/1412.0767" target="_blank" rel="noopener">learning Spatiotemporal feature with 3DConvolutional Networks</a>这篇文章，前面的博客介绍过C3D网络及特征。</p><h3 id="Proposal-Network"><a href="#Proposal-Network" class="headerlink" title="Proposal Network"></a>Proposal Network</h3><p>在生成训练数据时，同时还记录和segment和ground truth instance之间的最大重叠度（IoU)。对于proposal网络来说，将最大IoU大于0.7的标记为true，最大IoU小于0.3的标记为背景。以及类别（即如果存在多个重叠的ground truth,取重叠度最大的那个）。</p><p>将得到的所有片段输入到C3D网络中，经过fc8后分为两类，即判断是否为背景，训练时将IoU大于0.7的作为正样本（动作），小于0.3的作为负样本（背景），对负样本进行采样使得正负样本比例均衡。采用softmax loss进行训练。proposal network的主要作用是去除一些背景片段。</p><h3 id="Classification-Network"><a href="#Classification-Network" class="headerlink" title="Classification Network"></a>Classification Network</h3><p>经过Proposal Network后，背景被去除，对剩下的数据进行$K$个类别的动作分类。</p><p>和Proposal Network类似，经过fc8后输出$K+1$类，其中一类是背景，这个网络被用来初始化localization network, 仅在训练阶段使用，在测试阶段不使用。训练时同样将IoU大于0.7的作为正样本（K类动作），小于0.3的作为背景类，对背景类动作进行采样使得背景类动作的数量和K类动作数量的平均值相近。训练时同样采用softmax loss。</p><h3 id="Localization-Network"><a href="#Localization-Network" class="headerlink" title="Localization Network"></a>Localization Network</h3><p>在估计动作的起始位置时，需要抑制与groundtruth重叠部分很小的片段，增强重叠部分大的片段，如下面图中的B片段才是真正需要保留的，AC应该去除。</p><p><div align="center"><br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/LocalizationNetwork.png" width="60%"><br></div><br>为了达到这样的目标，在loss function增加了overlap的损失。在一个minibatch中，有N个训练样本${ (s_n, k_n, v_n) }_{n = 1}^N$，对于第n个片段，fc8的输出向量为$O_n$，经过softmax后得到的预测结果为$P_n$，计算方式为：<br>$$<br>P_n^{(i)} = \frac{e^{O_n^{(i)}}}{\sum_{j=1}^N e^{O_n^{(i)}}}<br>$$<br>新的loss function为：<br>$$<br>L = L_{softmax} + \lambda \cdot L_{overlap}<br>$$<br>其中softmax损失函数为：<br>$$<br>L_{softmax} = \frac{1}{N} \sum_n(-log(P_n^{k_n}))<br>$$<br>是动作分类的损失函数，overlap的损失函数为：<br>$$<br>L_{overlap} = \frac{1}{N}\sum_n(\frac{1}{2} \cdot (\frac{(P_n^{k_n})^2}{(v_n)^\alpha} -1) \cdot [k_n &gt; 0])<br>$$<br>这里的$k_n &gt;0$表示$[k_n &gt;0] = 1$时，该片段是动作，$[k_n &gt;0] = 0$时，该片段是背景。$L_{overlap}$主要是为了增强与GT有很大重合度的片段的得分，抑制重合度较低的片段。</p><p>对$L_{softmax}$求导：<br>$$<br>\frac{\partial L_{softmax}}{\partial O_n^{(i)}} =<br>\left{\begin{matrix}<br>\frac{1}{N} \cdot (P_n^{(k_n)} - 1) &amp; i = k_n\<br>\frac{1}{N} \cdot P_n^{(i)} &amp; i\neq k_n<br>\end{matrix}\right.<br>$$<br>对$L_{overlap}$求导：<br>$$<br>\frac{\partial L_{overlap}}{\partial O_n^{(i)}} =<br>\left{\begin{matrix}<br>\frac{1}{N} \cdot (\frac{(P_n^{(k_n)})^2}{(v_n)^{\alpha}}) \cdot (1-P_n^{(k_n)}) \cdot [k_n &gt; 0] &amp; i = k_n\<br>\frac{1}{N} \cdot (\frac{(P_n^{(k_n)})^2}{(v_n)^{\alpha}}) \cdot (-P_n^{(i)}) \cdot [k_n &gt; 0] &amp; i\neq k_n<br>\end{matrix}\right.<br>$$<br>==这里$i \neq k_n$的情况不知道是怎么得到的==</p><ul><li>如果当前片段属于背景，则$L_{overlap} = 0$，此时的损失函数为$L = L_{softmax}$；</li><li>如果当前片段为动作，则$L$达到最小值时，取$\lambda = 1$，可计算得到$P_n^{(k_n)} = \sqrt{(v_n)^{\alpha}} $，因此惩罚两种情况：<ul><li>由于误分类，导致$P_n^{(k_n)}$很小；</li><li>当$P_n^{(k_n)}$很大，超过目标$\sqrt{(v_n)^{\alpha}}$</li></ul></li><li>$L$随着$v_n$的减小而增大，表示与GT重叠部分小的片段不可靠，因为其可能包含很大的噪声。在特殊情况$v_n = 1$时，损失函数仅为softmax损失，随着$P_n^{(k_n)}$从0变为1，损失函数从$+ \infty$变为0。</li></ul><h3 id="预测阶段"><a href="#预测阶段" class="headerlink" title="预测阶段"></a>预测阶段</h3><p>预测时，滑动不同长度的时间窗，生成一组视频片段，输入到Proposal Network中，得到proposal的置信度得分$P_{prop}$，保留$P_{prop} &gt; 0.7$的片段，将保留的片段通过Localization Network，得到动作类别及置信度$P_{loc}$，基于$P_{loc}$进行NMS去冗余检测。</p>]]></content>
       
       <categories>
           
@@ -53,10 +78,10 @@
     </entry>
     
     <entry>
-      <title>IDT算法论文笔记</title>
-      <link href="/2018/12/19/computer_version/idt/"/>
-      <url>/2018/12/19/computer_version/idt/</url>
-      <content type="html"><![CDATA[<h1 id="Action-Recognition-with-Improved-Trajectory论文笔记"><a href="#Action-Recognition-with-Improved-Trajectory论文笔记" class="headerlink" title="Action Recognition with Improved Trajectory论文笔记"></a>Action Recognition with Improved Trajectory论文笔记</h1><p>论文原文地址<a href="https://hal.inria.fr/hal-00873267v2/document" target="_blank" rel="noopener">Action Recognition with Improved Trajectory</a></p>]]></content>
+      <title>DT算法论文笔记</title>
+      <link href="/2018/12/19/computer_version/DT/"/>
+      <url>/2018/12/19/computer_version/DT/</url>
+      <content type="html"><![CDATA[<h1 id="Dense-Trajectories-and-Motion-Boundary-Descriptors-for-Action-Recognition论文笔记"><a href="#Dense-Trajectories-and-Motion-Boundary-Descriptors-for-Action-Recognition论文笔记" class="headerlink" title="Dense Trajectories and Motion Boundary Descriptors for Action Recognition论文笔记"></a>Dense Trajectories and Motion Boundary Descriptors for Action Recognition论文笔记</h1><p>论文原文地址<a href="https://www.researchgate.net/publication/257672334_Dense_Trajectories_and_Motion_Boundary_Descriptors_for_Action_Recognition" target="_blank" rel="noopener">Dense Trajectories and Motion Boundary Descriptors for Action Recognition</a></p><p>iDT算法是行为识别领域中非常经典的一种算法，在深度学习应用于该领域前也是效果最好的算法。由INRIA的IEAR实验室于2013年发表于ICCV。目前基于深度学习的行为识别算法效果已经超过了iDT算法，但与iDT的结果做ensemble总还是能获得一些提升。所以这几年好多论文的最优效果都是“Our method+iDT”的形式。这篇论文是iDT的基础。</p><h2 id="Dense-Trajectories密集轨迹算法"><a href="#Dense-Trajectories密集轨迹算法" class="headerlink" title="Dense Trajectories密集轨迹算法"></a>Dense Trajectories密集轨迹算法</h2><p>通过光流场获取视频序列轨迹，沿轨迹提取形状特征、HOF、HOG、MBH特恒，再利用BoF方法对特征编码，最后训练SVM分类器。主要分为三个阶段：密集特征采样、特征点轨迹跟踪、基于轨迹的特征提取。其主要结构为：</p><div align="center"><br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/DT.png" width="90%"><br></div><h3 id="Dense-Sampling密集采样"><a href="#Dense-Sampling密集采样" class="headerlink" title="Dense Sampling密集采样"></a>Dense Sampling密集采样</h3><p>在多空间尺度通过网格划分的方式密集采样特征点，多空间尺度保证了采样特征点覆盖所有空间位置及尺度。通常取8个空间尺度。后续的特征提取在各个尺度上分别进行，特征点采样间隔$W$大概为5。</p><p>在时间序列跟踪特征点时，需要去除部分无法跟踪的特征点。通过计算每个像素点的自相关矩阵的特征值，并设置阈值$T$去除部分特征值<br>$$<br>T = 0.001 \cdot max_{i \in I} min(\lambda _i^1, \lambda_i^2)<br>$$<br>其中$\lambda_i^1, \lambda_i^2$为像素点$i$的特征值。</p><h3 id="Trajectory-Shap-Descriptor轨迹形状描述子"><a href="#Trajectory-Shap-Descriptor轨迹形状描述子" class="headerlink" title="Trajectory Shap Descriptor轨迹形状描述子"></a>Trajectory Shap Descriptor轨迹形状描述子</h3><ol><li>Dense Sampling得到的密集采样后得到的某特征点坐标为$P_t = (x_t, y_t)$，则下一帧图像的特征点位置$P_{t+1} = (x_{t+1}, y_{t+1})$为：</li></ol><p>$$<br>P_{t+1} = (x_t, y_t) + (M * \omega_t)|_{x_t, y_t}<br>$$</p><p>$\omega_t = (u_t, v_t)$为密集光流场，由$I_t$，$I_{t+1}$计算得到</p><p>$M$为中值滤波器，大小为$3*3$</p><p>可以看出，计算特征点领域内的光流中值得到特征点的运动方向。</p><ol start="2"><li>连续$L$帧可以使用$P_t$计算出后面的$P_{t+1},…,P_{t+L}$帧的轨迹，但长时跟踪不可靠，每$L$帧需要重新进行密集特征点采样，一般$L=15$。</li><li>轨迹本身也可以构成轨迹形状特征描述子。对于长度为$L$的轨迹，用$(\Delta P_t,…, \Delta P_{t+L-1})$描述，</li></ol><p>$$<br>\Delta P_t = (P_{t+1} - P_t) = (x_{t+1} - x_t, y_{t+1} - y_t)<br>$$</p><p>正则化后获得轨迹描述子$T$:<br>$$<br>T = \frac{(\Delta P_t,…, \Delta P_{t+L-1})}{\sum _{j = 1} ^{t+L-1} ||\Delta P_j||}<br>$$</p><h3 id="Motion-and-Structure-Descriptors运动和结构描述子"><a href="#Motion-and-Structure-Descriptors运动和结构描述子" class="headerlink" title="Motion and Structure Descriptors运动和结构描述子"></a>Motion and Structure Descriptors运动和结构描述子</h3><p>除了轨迹描述子$T$，还用到了HOG（Histogram of Gradient）、HOF（Histogram of Oriented Optical Flow）、MBH（Motion Boundary Histogram）等特征。</p><ol><li>沿着某特征点长度为$L$的轨迹，每帧图像取特征点周围$N \times N$区域（$N$=32），构成时空体（volume），对于时空体进行网格划分，空间上每个方向划分为$n_{\sigma}$份($n_{\sigma} = 2$)，时间上均匀选取$n_{\tau}$，($n_{\tau} = 2$)共分出$n_{\sigma} \times n_{\sigma} \times n_{\tau}$份。</li><li>对各个区域进行特征提取特征</li></ol><ul><li><strong>HOG</strong>特征：计算灰度图梯度直方图，bin_num=8，输出长度为$2<em>2</em>3*8$</li><li><strong>HOF</strong>特征：计算光流直方图（包括方向和幅度信息），bin_num=8+1，额外一个用于统计光流幅度小于某阈值的像素点，输出长度为$2<em>2</em>3*9$</li><li><strong>MBH</strong>特征：计算的是光流图像梯度的直方图，也可以理解为在光流图像上计算的HOG特征，由于光流图像包括x方向和y方向，故分别计算$MBH_x$和$MBH_y$，输出长度为$2<em>2</em>2<em>3</em>8$</li></ul><ol start="3"><li>在计算完后，还需要进行特征的归一化，DT算法中对HOG,HOF和MBH均使用L2范数归一化。</li></ol><h3 id="Bag-of-Features特征编码"><a href="#Bag-of-Features特征编码" class="headerlink" title="Bag of Features特征编码"></a>Bag of Features特征编码</h3><p>对得到的特征组（T，HOG，HOF，MBH）编码，得到一个定长的编码。</p><p>Bag of Features模型仿照文本检索领域的Bag-of-Words方法</p><ul><li>把每幅图像描述为一个局部区域/关键点(Patches/Key Points)特征的无序集合。</li><li>使用某种聚类算法(如K-means)将局部特征进行聚类，每个聚类中心被看作是词典中的一个视觉词汇(Visual Word)，相当于文本检索中的词，视觉词汇由聚类中心对应特征形成的码字(code word)来表示（可看当为一种特征量化过程）。</li><li>所有视觉词汇形成一个视觉词典(Visual Vocabulary)，对应一个码书(code book)，即码字的集合，词典中所含词的个数反映了词典的大小。</li><li>图像中的每个特征都将被映射到视觉词典的某个词上，这种映射可以通过计算特征间的距离去实现，然后统计每个视觉词的出现与否或次数，图像可描述为一个维数相同的直方图向量，即Bag-of-Features。</li></ul><p>在训练码书时，DT算法随机选取了100000组特征进行训练。码书的大小则设置为4000。在训练完码书后，对每个视频的特征组进行编码，就可以得到视频对应的特征。</p>]]></content>
       
       <categories>
           
@@ -407,9 +432,9 @@
       
         <tags>
             
-            <tag> python </tag>
-            
             <tag> leetcode </tag>
+            
+            <tag> python </tag>
             
         </tags>
       
@@ -430,9 +455,9 @@
       
         <tags>
             
-            <tag> python </tag>
-            
             <tag> leetcode </tag>
+            
+            <tag> python </tag>
             
         </tags>
       
@@ -534,7 +559,7 @@
       <title>R-CNN目标检测方法</title>
       <link href="/2018/07/26/computer_version/R-CNN/"/>
       <url>/2018/07/26/computer_version/R-CNN/</url>
-      <content type="html"><![CDATA[<h1 id="物体检测R-CNN介绍"><a href="#物体检测R-CNN介绍" class="headerlink" title="物体检测R-CNN介绍"></a>物体检测R-CNN介绍</h1><h2 id="R-CNN"><a href="#R-CNN" class="headerlink" title="R-CNN"></a>R-CNN</h2><p>R-CNN的贡献主要是第一次将CNN引入到目标检测中，主要解决两个问题：</p><ul><li>速度：经典的目标检测算法使用滑动窗法依次判断所有可能的区域。R-CNN则预先提取一系列较可能是物体的候选区域，之后仅在这些候选区域上提取特征，进行判断。</li><li>训练集：经典的目标检测算法在区域中提取人工设定的特征（Haar，HOG）。R-CNN则需要训练CNN进行特征提取。可供使用的有两个数据库：<ul><li>一个较大的识别库（ImageNet ILSVC 2012）：标定每张图片中物体的类别。一千万图像，1000类。 </li><li>一个较小的检测库（PASCAL VOC 2007）：标定每张图片中，物体的类别和位置。一万图像，20类。</li></ul></li></ul><h3 id="检测过程"><a href="#检测过程" class="headerlink" title="检测过程"></a>检测过程</h3><p>R-CNN的检测过程主要分为四个步骤：</p><ul><li>使用<strong>Selective Search</strong>方法，每张图片生成1K~2K个RoI；</li><li>对每个RoI使用<strong>CNN</strong>提取特征；</li><li>将feature vector 送入<strong>SVM</strong>二分类器中，判断是否属于该类；</li><li>bounding-box regression精细修正RoI位置。</li></ul><p>其整体识别流程如下图所示：<br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/83769262.jpg" alt="R-CNN" title="R-CNN" width="75%/"></p><h4 id="Selective-Search"><a href="#Selective-Search" class="headerlink" title="Selective Search"></a>Selective Search</h4><p>选择性搜索是一种用于目标检测的区域推荐算法。它的设计速度快，召回率高。它是根据颜色、纹理、大小和形状的兼容性，计算相似区域的层次分组。 </p><h5 id="候选区"><a href="#候选区" class="headerlink" title="候选区"></a>候选区</h5><ul><li>使用一种分割手段，将图像分割成小区域 </li><li>查看现有小区域，合并可能性最高的两个区域。重复直到整张图像合并成一个区域位置 </li><li>输出所有曾经存在过的区域，所谓候选区域 </li><li>候选区域生成和后续步骤相对独立，实际可以使用任意算法进行。</li></ul><h5 id="合并规则（优先合并以下四种区域）"><a href="#合并规则（优先合并以下四种区域）" class="headerlink" title="合并规则（优先合并以下四种区域）"></a>合并规则（优先合并以下四种区域）</h5><ul><li>颜色（颜色直方图）相近的 </li><li>纹理（梯度直方图）相近的 </li><li>合并后总面积小的 </li><li>合并后，总面积在其BBOX中所占比例大的</li></ul><h5 id="多样化和后处理"><a href="#多样化和后处理" class="headerlink" title="多样化和后处理"></a>多样化和后处理</h5><p>为尽可能不遗漏候选区域，上述操作在多个颜色空间中同时进行（RGB,HSV,Lab等）。在一个颜色空间中，使用上述四条规则的不同组合进行合并。所有颜色空间与所有规则的全部结果，在去除重复后，都作为候选区域输出。</p><h4 id="特征提取"><a href="#特征提取" class="headerlink" title="特征提取"></a>特征提取</h4><h5 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h5><p>将每个region都wrap到固定的大小（227×227） 。此处scale时需要注意：外扩的尺寸大小，形变时是否保持原比例，对框外区域直接截取还是补灰 。</p><h5 id="CNN"><a href="#CNN" class="headerlink" title="CNN"></a>CNN</h5><p>将所有变形后的region输入到CNN中，网络结构为Hinton 2012年在Image Net上的分类网络AlexNet，其网络结构为：<br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/66806389.jpg" alt="AlexNet" title="AlexNet" width="75%"></p><p>AlexNet使用了两块GPU训练神经网络。此网络提取的特征为4096维，之后送入一个4096-&gt;1000的全连接(fc)层进行分类。  学习率0.01。<br>训练的过程分为两步：</p><ul><li><strong>pre-training</strong> 使用ILSVRC 2012的数据集进行有监督的分类训练（迁移训练），初步训练出CNN每层的参数，输出1000维类别标号；</li><li><strong>fine-tuning</strong> 使用PASCAL VOC2007数据集，将第2步训练出来的CNN模型替换最后一层，变为N+1个输出，采用SGD方法训练最后一层参数。</li></ul><h5 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h5><p>对每一类目标，使用一个线性SVM二类分类器进行判别。输入为深度网络输出的4096维特征，输出是否属于此类。<br>由于负样本很多，使用hard negative mining方法。 样本判别方法为：</p><ul><li>正样本：本类的真实值</li><li>负样本：考察每一个候选框，如果和本类所有标定框的重叠都小于0.3，认定其为负样本。</li></ul><h5 id="regression"><a href="#regression" class="headerlink" title="regression"></a>regression</h5><ol><li>目标检测问题的识别精度为：<strong>mAP</strong>（mean average precision）</li></ol><ul><li><strong>precision</strong>：对于某张图片计算object C在图片上的查准率<ul><li>某图片上C识别正确的个数/ 某图片C的总个数</li><li>$precision_{c} = N(TruePositives)<em>{c} / N(TotalObjects)</em>{c}$</li></ul></li><li><strong>average precision</strong>：对于object C在多张图片上的查准率<ul><li>每张图片的precisionc的和 / 含有object C的图片的数目</li><li>$averagePrecision_{c} = sum(precision_{c}) / N(TotalImages)_{c}$</li></ul></li><li><strong>mean average precision</strong>:对整个数据集的多个object的平均查准率<ul><li>每个objectc的average precision / 总的object数目</li><li>$meanAveragePrecision = sum(averagePrecision_{c}) / N(classcs)$</li></ul></li></ul><ol start="2"><li>目标检测定位精度：<strong>IoU</strong>（intersection over union ）</li></ol><ul><li>检测结果（detection result）和真实值（ground truth）的交集 / 其并集</li><li>IoU = (GT∩DR) / (GT∪DR) </li></ul><ol start="3"><li>机器学习中的评价指标：<strong>accuracy、precision、recall </strong></li></ol><ul><li>TP（true positive）正样本中预测为正样本        正确预测为正样本</li><li>FP（false positive）负样本中预测为正样本       错误预测为正样本</li><li>FN（false negative）正样本中预测为负样本     错误预测为负样本</li><li>TN（true negative）负样本中预测为负样本      正确预测为负样本 </li></ul><p>accuracy：预测正确的样本数                                       accuracy = (TP + TN) / (TP + FP + FN + TN) </p><p>precision：预测为正的样本中，正确预测的比例        precision = TP / (TP + FP) </p><p>recall：正样本中，正确预测的比例                              recall = TP / (TP + FN)   </p><p>F1: precision和recall的综合指标                                  F1 = 2×(precision / (precision + recall)) </p><ol start="4"><li>回归器</li></ol><p>在R-CNN中，对每一类目标，使用一个线性脊回归器进行精修。正则项$\lambda=10000$。  输入为深度网络pool5层的4096维特征，输出为xy方向的缩放和平移。  判定为本类的候选框中，和真值重叠面积大于0.6的候选框为正样本。</p><h3 id="优缺点分析"><a href="#优缺点分析" class="headerlink" title="优缺点分析"></a>优缺点分析</h3><h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ul><li>首次使用CNN进行特征提取</li><li>使用bounding box regression进行目标包围框的修改 </li></ul><h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ul><li>selective search算法较为耗时，每帧图像需要2s处理时间</li><li>CNN前向传播较为耗时，对每一个RoI（region of interest）都需要输入AlexNet提取特征</li><li>三个步骤分别训练，消耗存储空间 </li></ul>]]></content>
+      <content type="html"><![CDATA[<h1 id="物体检测R-CNN介绍"><a href="#物体检测R-CNN介绍" class="headerlink" title="物体检测R-CNN介绍"></a>物体检测R-CNN介绍</h1><h2 id="R-CNN"><a href="#R-CNN" class="headerlink" title="R-CNN"></a>R-CNN</h2><p>R-CNN的贡献主要是第一次将CNN引入到目标检测中，主要解决两个问题：</p><ul><li>速度：经典的目标检测算法使用滑动窗法依次判断所有可能的区域。R-CNN则预先提取一系列较可能是物体的候选区域，之后仅在这些候选区域上提取特征，进行判断。</li><li>训练集：经典的目标检测算法在区域中提取人工设定的特征（Haar，HOG）。R-CNN则需要训练CNN进行特征提取。可供使用的有两个数据库：<ul><li>一个较大的识别库（ImageNet ILSVC 2012）：标定每张图片中物体的类别。一千万图像，1000类。 </li><li>一个较小的检测库（PASCAL VOC 2007）：标定每张图片中，物体的类别和位置。一万图像，20类。</li></ul></li></ul><h3 id="检测过程"><a href="#检测过程" class="headerlink" title="检测过程"></a>检测过程</h3><p>R-CNN的检测过程主要分为四个步骤：</p><ul><li>使用<strong>Selective Search</strong>方法，每张图片生成1K~2K个RoI；</li><li>对每个RoI使用<strong>CNN</strong>提取特征；</li><li>将feature vector 送入<strong>SVM</strong>二分类器中，判断是否属于该类；</li><li>bounding-box regression精细修正RoI位置。</li></ul><p>其整体识别流程如下图所示：</p><div align="center"><br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/83769262.jpg" alt="R-CNN" title="R-CNN" width="75%/"><br></div><h4 id="Selective-Search"><a href="#Selective-Search" class="headerlink" title="Selective Search"></a>Selective Search</h4><p>选择性搜索是一种用于目标检测的区域推荐算法。它的设计速度快，召回率高。它是根据颜色、纹理、大小和形状的兼容性，计算相似区域的层次分组。 </p><h5 id="候选区"><a href="#候选区" class="headerlink" title="候选区"></a>候选区</h5><ul><li>使用一种分割手段，将图像分割成小区域 </li><li>查看现有小区域，合并可能性最高的两个区域。重复直到整张图像合并成一个区域位置 </li><li>输出所有曾经存在过的区域，所谓候选区域 </li><li>候选区域生成和后续步骤相对独立，实际可以使用任意算法进行。</li></ul><h5 id="合并规则（优先合并以下四种区域）"><a href="#合并规则（优先合并以下四种区域）" class="headerlink" title="合并规则（优先合并以下四种区域）"></a>合并规则（优先合并以下四种区域）</h5><ul><li>颜色（颜色直方图）相近的 </li><li>纹理（梯度直方图）相近的 </li><li>合并后总面积小的 </li><li>合并后，总面积在其BBOX中所占比例大的</li></ul><h5 id="多样化和后处理"><a href="#多样化和后处理" class="headerlink" title="多样化和后处理"></a>多样化和后处理</h5><p>为尽可能不遗漏候选区域，上述操作在多个颜色空间中同时进行（RGB,HSV,Lab等）。在一个颜色空间中，使用上述四条规则的不同组合进行合并。所有颜色空间与所有规则的全部结果，在去除重复后，都作为候选区域输出。</p><h4 id="特征提取"><a href="#特征提取" class="headerlink" title="特征提取"></a>特征提取</h4><h5 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h5><p>将每个region都wrap到固定的大小（227×227） 。此处scale时需要注意：外扩的尺寸大小，形变时是否保持原比例，对框外区域直接截取还是补灰 。</p><h5 id="CNN"><a href="#CNN" class="headerlink" title="CNN"></a>CNN</h5><p>将所有变形后的region输入到CNN中，网络结构为Hinton 2012年在Image Net上的分类网络AlexNet，其网络结构为：</p><div align="center"><br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/66806389.jpg" alt="AlexNet" title="AlexNet" width="75%"><br></div><p>AlexNet使用了两块GPU训练神经网络。此网络提取的特征为4096维，之后送入一个4096-&gt;1000的全连接(fc)层进行分类。  学习率0.01。<br>训练的过程分为两步：</p><ul><li><strong>pre-training</strong> 使用ILSVRC 2012的数据集进行有监督的分类训练（迁移训练），初步训练出CNN每层的参数，输出1000维类别标号；</li><li><strong>fine-tuning</strong> 使用PASCAL VOC2007数据集，将第2步训练出来的CNN模型替换最后一层，变为N+1个输出，采用SGD方法训练最后一层参数。</li></ul><h5 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h5><p>对每一类目标，使用一个线性SVM二类分类器进行判别。输入为深度网络输出的4096维特征，输出是否属于此类。<br>由于负样本很多，使用hard negative mining方法。 样本判别方法为：</p><ul><li>正样本：本类的真实值</li><li>负样本：考察每一个候选框，如果和本类所有标定框的重叠都小于0.3，认定其为负样本。</li></ul><h5 id="regression"><a href="#regression" class="headerlink" title="regression"></a>regression</h5><ol><li>目标检测问题的识别精度为：<strong>mAP</strong>（mean average precision）</li></ol><ul><li><strong>precision</strong>：对于某张图片计算object C在图片上的查准率<ul><li>某图片上C识别正确的个数/ 某图片C的总个数</li><li>$precision_{c} = N(TruePositives)<em>{c} / N(TotalObjects)</em>{c}$</li></ul></li><li><strong>average precision</strong>：对于object C在多张图片上的查准率<ul><li>每张图片的precisionc的和 / 含有object C的图片的数目</li><li>$averagePrecision_{c} = sum(precision_{c}) / N(TotalImages)_{c}$</li></ul></li><li><strong>mean average precision</strong>:对整个数据集的多个object的平均查准率<ul><li>每个objectc的average precision / 总的object数目</li><li>$meanAveragePrecision = sum(averagePrecision_{c}) / N(classcs)$</li></ul></li></ul><ol start="2"><li>目标检测定位精度：<strong>IoU</strong>（intersection over union ）</li></ol><ul><li>检测结果（detection result）和真实值（ground truth）的交集 / 其并集</li><li>IoU = (GT∩DR) / (GT∪DR) </li></ul><ol start="3"><li>机器学习中的评价指标：<strong>accuracy、precision、recall </strong></li></ol><ul><li>TP（true positive）正样本中预测为正样本        正确预测为正样本</li><li>FP（false positive）负样本中预测为正样本       错误预测为正样本</li><li>FN（false negative）正样本中预测为负样本     错误预测为负样本</li><li>TN（true negative）负样本中预测为负样本      正确预测为负样本 </li></ul><p>accuracy：预测正确的样本数                                       accuracy = (TP + TN) / (TP + FP + FN + TN) </p><p>precision：预测为正的样本中，正确预测的比例        precision = TP / (TP + FP) </p><p>recall：正样本中，正确预测的比例                              recall = TP / (TP + FN)   </p><p>F1: precision和recall的综合指标                                  F1 = 2×(precision / (precision + recall)) </p><ol start="4"><li>回归器</li></ol><p>在R-CNN中，对每一类目标，使用一个线性脊回归器进行精修。正则项$\lambda=10000$。  输入为深度网络pool5层的4096维特征，输出为xy方向的缩放和平移。  判定为本类的候选框中，和真值重叠面积大于0.6的候选框为正样本。</p><h3 id="优缺点分析"><a href="#优缺点分析" class="headerlink" title="优缺点分析"></a>优缺点分析</h3><h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ul><li>首次使用CNN进行特征提取</li><li>使用bounding box regression进行目标包围框的修改 </li></ul><h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ul><li>selective search算法较为耗时，每帧图像需要2s处理时间</li><li>CNN前向传播较为耗时，对每一个RoI（region of interest）都需要输入AlexNet提取特征</li><li>三个步骤分别训练，消耗存储空间 </li></ul>]]></content>
       
       <categories>
           
@@ -557,7 +582,7 @@
       <title>图像分割</title>
       <link href="/2018/07/22/computer_version/imgSegmentation/"/>
       <url>/2018/07/22/computer_version/imgSegmentation/</url>
-      <content type="html"><![CDATA[<h1 id="图像分割"><a href="#图像分割" class="headerlink" title="图像分割"></a><center>图像分割</center></h1><p>图像分割就是预测图像中每一个像素所属的类别或者物体。图像分割有两个子问题，一个是只预测类别层面的分割，对每个像素标出一个位置。第二个是区分不同物体的个体。应用场景，比如自动驾驶，3D 地图重建，美化图片，人脸建模等等。<br>传统的图像分割通常和图像分类结合，它是图像识别的第一阶段。<br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/60398275.jpg" title="图像识别流程" alt="图像识别流程" width="80%"></p><p>图像分割难点：</p><ul><li>噪声影响</li><li>无法控制环境</li><li>没有一致的标准</li><li>没有足够的检测数据</li><li>存在病态问题</li></ul><p>当图像背景中存在与前景目标相 同或相似区域时，没有用户的交互，自动分割出感兴趣的前景目标这个问题本身就是病态的。<br>图像分割可以分为两类：</p><ul><li>完全分割<ul><li>每部分都和一个实物相关</li><li>没有重叠的区域</li></ul></li><li>部分分割<ul><li>拥有均匀亮度、颜色等的区域</li><li>重叠的部分，需要进一步处理</li></ul></li></ul><h2 id="分割方法"><a href="#分割方法" class="headerlink" title="分割方法"></a>分割方法</h2><h3 id="基于阈值的分割"><a href="#基于阈值的分割" class="headerlink" title="基于阈值的分割"></a>基于阈值的分割</h3><p>阈值分割是基于直方图的，对图像进行灰度阈值化是最简单的分割处理。图像阈值化算法简单高效，在很多场景中依然得到很多应用，实时性很好。图像阈值化的缺陷也是明显的，不能够很好的利用图像中的诸如色彩、纹理等语义信息，因此在复杂场景中无法得到目标结果。 </p><h4 id="阈值"><a href="#阈值" class="headerlink" title="阈值"></a>阈值</h4><p>图像阈值化分为全局阈值和局部阈值及动态阈值。全局阈值是对整幅图像使用单个阈值，局部阈值是根据图像局部信息在局部执行阈值化。阈值化操作有许多改进算法，例如：局部阈值化、带阈值化、半阈值化、多阈值化等。阈值化的关键在于如何选择阈值。  </p><p>阈值分割的优点是计算简单、运算效率较高、速度快。全局阈值对于灰度相差很大的不同目标和背景能进行有效的分割。当图像的灰度差异不明显或不同目标的灰度值范围有重叠时，应采用局部阈值或动态阈值分割法。另一方面，这种方法只考虑像素本身的灰度值，一般不考虑空间特征，因而对噪声很敏感。在实际应用中，阈值法通常与其他方法结合使用。 </p><h5 id="全局阈值"><a href="#全局阈值" class="headerlink" title="全局阈值"></a>全局阈值</h5><p>全局阈值法采用同一个灰度值作为分割门限对整幅图进行处理，特别对直方图分布呈双峰态的图像分割效果好，如：</p><p><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/30853134.jpg" title="全局阈值分割" alt="全局阈值分割" width="80%"> </p><p>但在有意义的全局阈值不存在的情况下，全局阈值的分割效果很差，如：<br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/36706577.jpg" title="全局阈值分割" alt="全局阈值分割" width="80%"> </p><h5 id="迭代阈值图像分割"><a href="#迭代阈值图像分割" class="headerlink" title="迭代阈值图像分割"></a>迭代阈值图像分割</h5><p>迭代阈值的步骤为：</p><ol><li>统计图像灰度直方图,求出图象的最大灰度值和最小灰度值，分别记为$Z_{max}$和$Z_{min}，令初始阈值$T_{0} = \frac {Z_{max} +Z_{min} } {2}$。</li><li>根据阈值TK将图象分割为前景和背景，计算小于TO所有灰度的均值ZO，和大于TO的所有灰度的均值ZB。</li><li>求出新阈值TK+1=(ZO+ZB)/2；</li><li>若TK==TK+1，则所得即为阈值；否则转2，迭代计算。</li></ol><h5 id="动态阈值"><a href="#动态阈值" class="headerlink" title="动态阈值"></a>动态阈值</h5><h3 id="边缘检测"><a href="#边缘检测" class="headerlink" title="边缘检测"></a>边缘检测</h3><p>通过不同的特征检测物体边缘</p><h3 id="基于空间的分割"><a href="#基于空间的分割" class="headerlink" title="基于空间的分割"></a>基于空间的分割</h3><p>寻找满足homogeneity criterion 条件的最大空间。</p><h3 id="结合边缘检测及空间分割"><a href="#结合边缘检测及空间分割" class="headerlink" title="结合边缘检测及空间分割"></a>结合边缘检测及空间分割</h3>]]></content>
+      <content type="html"><![CDATA[<h1 id="图像分割"><a href="#图像分割" class="headerlink" title="图像分割"></a><center>图像分割</center></h1><p>图像分割就是预测图像中每一个像素所属的类别或者物体。图像分割有两个子问题，一个是只预测类别层面的分割，对每个像素标出一个位置。第二个是区分不同物体的个体。应用场景，比如自动驾驶，3D 地图重建，美化图片，人脸建模等等。<br>传统的图像分割通常和图像分类结合，它是图像识别的第一阶段。</p><div align="center"><br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/60398275.jpg" title="图像识别流程" alt="图像识别流程" width="80%"><br></div><p>图像分割难点：</p><ul><li>噪声影响</li><li>无法控制环境</li><li>没有一致的标准</li><li>没有足够的检测数据</li><li>存在病态问题</li></ul><p>当图像背景中存在与前景目标相 同或相似区域时，没有用户的交互，自动分割出感兴趣的前景目标这个问题本身就是病态的。<br>图像分割可以分为两类：</p><ul><li>完全分割<ul><li>每部分都和一个实物相关</li><li>没有重叠的区域</li></ul></li><li>部分分割<ul><li>拥有均匀亮度、颜色等的区域</li><li>重叠的部分，需要进一步处理</li></ul></li></ul><h2 id="分割方法"><a href="#分割方法" class="headerlink" title="分割方法"></a>分割方法</h2><h3 id="基于阈值的分割"><a href="#基于阈值的分割" class="headerlink" title="基于阈值的分割"></a>基于阈值的分割</h3><p>阈值分割是基于直方图的，对图像进行灰度阈值化是最简单的分割处理。图像阈值化算法简单高效，在很多场景中依然得到很多应用，实时性很好。图像阈值化的缺陷也是明显的，不能够很好的利用图像中的诸如色彩、纹理等语义信息，因此在复杂场景中无法得到目标结果。 </p><h4 id="阈值"><a href="#阈值" class="headerlink" title="阈值"></a>阈值</h4><p>图像阈值化分为全局阈值和局部阈值及动态阈值。全局阈值是对整幅图像使用单个阈值，局部阈值是根据图像局部信息在局部执行阈值化。阈值化操作有许多改进算法，例如：局部阈值化、带阈值化、半阈值化、多阈值化等。阈值化的关键在于如何选择阈值。  </p><p>阈值分割的优点是计算简单、运算效率较高、速度快。全局阈值对于灰度相差很大的不同目标和背景能进行有效的分割。当图像的灰度差异不明显或不同目标的灰度值范围有重叠时，应采用局部阈值或动态阈值分割法。另一方面，这种方法只考虑像素本身的灰度值，一般不考虑空间特征，因而对噪声很敏感。在实际应用中，阈值法通常与其他方法结合使用。 </p><h5 id="全局阈值"><a href="#全局阈值" class="headerlink" title="全局阈值"></a>全局阈值</h5><p>全局阈值法采用同一个灰度值作为分割门限对整幅图进行处理，特别对直方图分布呈双峰态的图像分割效果好，如：</p><div align="center"><br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/30853134.jpg" title="全局阈值分割" alt="全局阈值分割" width="80%"><br></div><p>但在有意义的全局阈值不存在的情况下，全局阈值的分割效果很差，如：</p><div align="center"><br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/36706577.jpg" title="全局阈值分割" alt="全局阈值分割" width="80%"><br></div><h5 id="迭代阈值图像分割"><a href="#迭代阈值图像分割" class="headerlink" title="迭代阈值图像分割"></a>迭代阈值图像分割</h5><p>迭代阈值的步骤为：</p><ol><li>统计图像灰度直方图,求出图象的最大灰度值和最小灰度值，分别记为$Z_{max}$和$Z_{min}，令初始阈值$T_{0} = \frac {Z_{max} +Z_{min} } {2}$。</li><li>根据阈值TK将图象分割为前景和背景，计算小于TO所有灰度的均值ZO，和大于TO的所有灰度的均值ZB。</li><li>求出新阈值TK+1=(ZO+ZB)/2；</li><li>若TK==TK+1，则所得即为阈值；否则转2，迭代计算。</li></ol><h5 id="动态阈值"><a href="#动态阈值" class="headerlink" title="动态阈值"></a>动态阈值</h5><h3 id="边缘检测"><a href="#边缘检测" class="headerlink" title="边缘检测"></a>边缘检测</h3><p>通过不同的特征检测物体边缘</p><h3 id="基于空间的分割"><a href="#基于空间的分割" class="headerlink" title="基于空间的分割"></a>基于空间的分割</h3><p>寻找满足homogeneity criterion 条件的最大空间。</p><h3 id="结合边缘检测及空间分割"><a href="#结合边缘检测及空间分割" class="headerlink" title="结合边缘检测及空间分割"></a>结合边缘检测及空间分割</h3>]]></content>
       
       <categories>
           
@@ -616,11 +641,11 @@
       
         <tags>
             
-            <tag> 剑指offer </tag>
+            <tag> python </tag>
             
             <tag> java </tag>
             
-            <tag> python </tag>
+            <tag> 剑指offer </tag>
             
             <tag> 排序 </tag>
             
@@ -643,11 +668,11 @@
       
         <tags>
             
-            <tag> 剑指offer </tag>
+            <tag> python </tag>
             
             <tag> java </tag>
             
-            <tag> python </tag>
+            <tag> 剑指offer </tag>
             
             <tag> 栈和队列 </tag>
             
@@ -670,11 +695,11 @@
       
         <tags>
             
-            <tag> 剑指offer </tag>
+            <tag> python </tag>
             
             <tag> java </tag>
             
-            <tag> python </tag>
+            <tag> 剑指offer </tag>
             
             <tag> 二叉树 </tag>
             
@@ -697,11 +722,11 @@
       
         <tags>
             
-            <tag> 剑指offer </tag>
+            <tag> python </tag>
             
             <tag> java </tag>
             
-            <tag> python </tag>
+            <tag> 剑指offer </tag>
             
             <tag> 链表 </tag>
             
@@ -749,11 +774,11 @@
       
         <tags>
             
-            <tag> 剑指offer </tag>
+            <tag> python </tag>
             
             <tag> java </tag>
             
-            <tag> python </tag>
+            <tag> 剑指offer </tag>
             
             <tag> 数组 </tag>
             
@@ -776,9 +801,9 @@
       
         <tags>
             
-            <tag> java </tag>
-            
             <tag> leetcode </tag>
+            
+            <tag> java </tag>
             
         </tags>
       
@@ -799,9 +824,9 @@
       
         <tags>
             
-            <tag> java </tag>
-            
             <tag> leetcode </tag>
+            
+            <tag> java </tag>
             
         </tags>
       
@@ -822,9 +847,9 @@
       
         <tags>
             
-            <tag> java </tag>
-            
             <tag> leetcode </tag>
+            
+            <tag> java </tag>
             
         </tags>
       
