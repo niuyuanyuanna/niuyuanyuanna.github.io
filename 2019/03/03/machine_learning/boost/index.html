@@ -1,0 +1,81 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="boosting算法"><meta name="keywords" content="machine learning,boosting"><meta name="author" content="NYY,undefined"><meta name="copyright" content="NYY"><title>boosting算法 | NYY's blog</title><link rel="shortcut icon" href="/img/my_icon.jpg"><link rel="stylesheet" href="/css/index.css?version=1.5.6"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css?version=1.5.6"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Boosting算法汇总"><span class="toc-number">1.</span> <span class="toc-text">Boosting算法汇总</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#AdaBoost算法"><span class="toc-number">1.1.</span> <span class="toc-text">AdaBoost算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#过程"><span class="toc-number">1.1.1.</span> <span class="toc-text">过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#误差分析"><span class="toc-number">1.1.2.</span> <span class="toc-text">误差分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#前向分布算法和AdaBoost"><span class="toc-number">1.1.3.</span> <span class="toc-text">前向分布算法和AdaBoost</span></a></li></ol></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.jpg"></div><div class="author-info__name text-center">NYY</div><div class="author-info__description text-center"></div><div class="follow-button"><a href="https://github.com/niuyuanyuanna" target="_blank">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">47</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">36</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">10</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">Links</div><a class="author-info-links__name text-center" href="https://www.ouyangsong.com" target="_blank">欧阳松的博客</a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://github.com/niuyuanyuanna/BlogImages/raw/master/background/machine_learning.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">NYY's blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span></div><div id="post-info"><div id="post-title">boosting算法</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-03-03</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Machine-Learning/">Machine Learning</a><span class="post-meta__separator">|</span><i class="fa fa-comment-o post-meta__icon" aria-hidden="true"></i><a href="/2019/03/03/machine_learning/boost/#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2019/03/03/machine_learning/boost/"></span></a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">871</span><span class="post-meta__separator">|</span><span>Reading time: 4 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="Boosting算法汇总"><a href="#Boosting算法汇总" class="headerlink" title="Boosting算法汇总"></a>Boosting算法汇总</h1><h2 id="AdaBoost算法"><a href="#AdaBoost算法" class="headerlink" title="AdaBoost算法"></a>AdaBoost算法</h2><p>考虑给定二分类的训练数据集：<br>$$<br>T = {(x_1, y_1),(x_2, y_2),…,(x_N, y_N)}<br>$$<br>其中，每个样本点由实例与标记组成，实例$x_i \in \chi  \subseteq \mathbf{R} ^ n$，标记$y_i \in Y = \left {-1, +1\right }$，$\chi$为实例空间，$Y$为标记集合，AdaBoost算法从训练数据中学习一系列弱分类器或基分类器，并将这些弱分类器线性组合为一个强分类器。</p>
+<h3 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h3><p>输入：</p>
+<ul>
+<li>训练数据集：$T = {(x_1, y_1),(x_2, y_2),…,(x_N, y_N)}$</li>
+<li>弱学习算法</li>
+</ul>
+<p>输出：</p>
+<ul>
+<li>最终分类器$G(x)$</li>
+</ul>
+<ol>
+<li><p>初始化训练数据权值分布：</p>
+<p>$$<br>  D_1 = (w_{11}, w_{12},…,w_{1i},…,w_{1N}) \<br>  w_{1i} = \frac{1}{N}<br>$$</p>
+<p>假设训练数据集具有均匀的权值分布，即每个样本数据对于基本分类器的作用是相同的，保证在原始数据上学习基本分类器$G_1(x)$</p>
+</li>
+<li><p>对 $m = 1, 2, …, M$，即训练M个弱分类器</p>
+<ol>
+<li><p>使用具有权值分布$D(m)$的训练数据集学习，得到基分类器：</p>
+<p>$$<br>  G_m(x):\chi \rightarrow \left { -1, +1 \right }<br>$$</p>
+</li>
+<li><p>计算$G_m(x)$在加权训练数据集上的分类误差率:</p>
+<p>$$<br>  e_m = p(G_m(x_i) \neq y_i) = \sum_{i = 1} ^ N w_{mi}I(G_m(x_i)<br>  \neq y_i)<br>$$</p>
+<p>这里$w_mi$表示第m轮训练中第i个数据所占权重，且$\sum_{i = 1}^N w_{mi} = 1$，$G_m(x)$在加权的训练数据集上的分类误差是被误分类的样本的权值之和。</p>
+</li>
+<li><p>计算$G_m(x)$的系数$\alpha_m$：</p>
+<p>$$<br>  \alpha_m = \frac{1}{2}log \frac{1-e_m}{e_m}<br>$$</p>
+<p>$\alpha_m$表示$G_m(x)$在最终分类器$G(x)$中的重要性，由（5）式可以看出当$e_m \leq \frac{1}{2}$时，$\alpha_m &gt;=0$，且$\alpha_m $随$e_m​$减小而增大，因此可以看出分类误差率越小的基本分类器在最终的分类器中作用越大。</p>
+</li>
+<li><p>更新训练数据集的权值分布：</p>
+<p>$$<br>  D_{m + 1} =  (w_{m1}, w_{m2},…,w_{mi},…,w_{mN}) \<br>  w_{m + 1, i} = \frac{w_{mi}}{Z_{m}}e^{-\alpha_m y_i G_m(x_i)}\<br>  Z_m = \sum_{i = 1}^N w_{mi}e^{\alpha_m y_i G_m(x_i)}<br>$$</p>
+<p>其中$Z_m$为规范化因子，使得$D_{m+1}$成为一个概率分布。权值更新规则可以写为：<br>$$<br>  w_{m + 1,i} = \left{\begin{matrix}<br>  \frac{w_{mi}}{Z_{m}}e^{-\alpha_m} &amp; G_m(x_i) = y_i\<br>  \frac{w_{mi}}{Z_{m}}e^{\alpha_m} &amp;  G_m(x_i) \neq y_i<br>  \end{matrix}\right.<br>$$<br>可见，被误分类的权值被扩大，正确分类的权值被缩小。因此，误分类样本在下一轮的训练中起到更大的作用</p>
+</li>
+</ol>
+</li>
+<li><p>构建基本分类器的线性组合：</p>
+<p>$$<br>  f(x) = \sum _{m = 1}^M \alpha_m G_m(x)<br>$$</p>
+<p>这里$\sum_{m = 1} ^ M \alpha_m \neq 1$。最终的分类器模型为：</p>
+<p>$$<br>  G(x) = sign(f(x)) = sign(\sum_{m = 1} ^ M \alpha_m G_m(x))<br>$$</p>
+</li>
+</ol>
+<h3 id="误差分析"><a href="#误差分析" class="headerlink" title="误差分析"></a>误差分析</h3><p>AdaBoost算法的最终分类误差界为：</p>
+<p>$$<br>\frac{1}{N} \sum_{i=1}^N I(G(x_i) \neq y_i) \leq<br>\frac{1}{N} \sum_{i=1}^N e^{-y_i f(x_i)} = \prod_m Z_m<br>$$</p>
+<p>对于二分类问题的分类误差界：</p>
+<p>$$<br>\begin{align<em>}<br>\prod_m Z_m &amp;= \prod_m[2 \sqrt{e_m(1 - e_m)}] \<br>&amp;= \prod_m \sqrt{(1-4\gamma^2_m)} \<br>&amp; \leq e^{-2\sum_m \gamma^2_m}<br>\end{align</em>}<br>$$</p>
+<p>其中$\gamma_m = \frac{1}{2}-e_m​$</p>
+<p>若存在$\gamma &gt; 0$，使得对所有的m有$\gamma_m \geq \gamma$，则：</p>
+<p>$$<br>\frac{1}{N} \sum_{i=1}^N I(G((x_i) \neq y_i )\leq e^{-2M \gamma^2}<br>$$</p>
+<p>表明在此条件下，训练误差以指数速率下降，且并不需要知道下界$\gamma$，其具有适应性。</p>
+<h3 id="前向分布算法和AdaBoost"><a href="#前向分布算法和AdaBoost" class="headerlink" title="前向分布算法和AdaBoost"></a>前向分布算法和AdaBoost</h3><p>AdaBoost模型为加法模型、指数损失、前向分布算法的二分类学习方法。它是前向分布加法算法的特例。</p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">NYY</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yoursite.com/2019/03/03/machine_learning/boost/">http://yoursite.com/2019/03/03/machine_learning/boost/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/machine-learning/">machine learning</a><a class="post-meta__tags" href="/tags/boosting/">boosting</a></div><div class="social-share"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><nav id="pagination"><div class="next-post pull-right"><a href="/2019/02/26/work/mobileNets/"><span>MobileNets</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="disqus_thread"></div><script>var unused = null;
+var disqus_config = function () {
+  this.page.url = 'http://yoursite.com/2019/03/03/machine_learning/boost/';
+  this.page.identifier = '2019/03/03/machine_learning/boost/';
+  this.page.title = 'boosting算法';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + 'niuyuanyuan' +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script><script id="dsq-count-src" src="https://niuyuanyuan.disqus.com/count.js" async></script></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2018 - 2019 By NYY</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="/js/third-party/anime.min.js"></script><script src="/js/third-party/jquery.min.js"></script><script src="/js/third-party/jquery.fancybox.min.js"></script><script src="/js/third-party/velocity.min.js"></script><script src="/js/third-party/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.5.6"></script><script src="/js/fancybox.js?version=1.5.6"></script><script src="/js/sidebar.js?version=1.5.6"></script><script src="/js/copy.js?version=1.5.6"></script><script src="/js/fireworks.js?version=1.5.6"></script><script src="/js/transition.js?version=1.5.6"></script><script src="/js/scroll.js?version=1.5.6"></script><script src="/js/head.js?version=1.5.6"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  }
+});
+</script><script type="text/x-mathjax-config">MathJax.Hub.Queue(function() {
+  var all = MathJax.Hub.getAllJax(), i;
+  for (i=0; i < all.length; i += 1) {
+    all[i].SourceElement().parentNode.className += ' has-jax';
+  }
+});
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></body></html>
