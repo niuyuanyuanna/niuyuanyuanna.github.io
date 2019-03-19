@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="图像分割"><meta name="keywords" content="CV,图像处理,原理"><meta name="author" content="NYY,undefined"><meta name="copyright" content="NYY"><title>图像分割 | NYY's blog</title><link rel="shortcut icon" href="/img/my_icon.jpg"><link rel="stylesheet" href="/css/index.css?version=1.5.6"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css?version=1.5.6"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="图像分割"><meta name="keywords" content="CV,图像处理,原理"><meta name="author" content="NYY"><meta name="copyright" content="NYY"><title>图像分割 | NYY's blog</title><link rel="shortcut icon" href="/img/my_icon.jpg"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script><!-- hexo-inject:begin --><!-- hexo-inject:end -->var GLOBAL_CONFIG = { 
   root: '/',
   algolia: undefined,
   localSearch: undefined,
@@ -7,9 +7,14 @@
     error: 'Copy error',
     noSupport: 'The browser does not support'
   }
-} </script></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#图像分割"><span class="toc-number">1.</span> <span class="toc-text">图像分割</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#分割方法"><span class="toc-number">1.1.</span> <span class="toc-text">分割方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基于阈值的分割"><span class="toc-number">1.1.1.</span> <span class="toc-text">基于阈值的分割</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#阈值"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">阈值</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#全局阈值"><span class="toc-number">1.1.1.1.1.</span> <span class="toc-text">全局阈值</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#迭代阈值图像分割"><span class="toc-number">1.1.1.1.2.</span> <span class="toc-text">迭代阈值图像分割</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#动态阈值"><span class="toc-number">1.1.1.1.3.</span> <span class="toc-text">动态阈值</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#边缘检测"><span class="toc-number">1.1.2.</span> <span class="toc-text">边缘检测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于空间的分割"><span class="toc-number">1.1.3.</span> <span class="toc-text">基于空间的分割</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结合边缘检测及空间分割"><span class="toc-number">1.1.4.</span> <span class="toc-text">结合边缘检测及空间分割</span></a></li></ol></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.jpg"></div><div class="author-info__name text-center">NYY</div><div class="author-info__description text-center"></div><div class="follow-button"><a href="https://github.com/niuyuanyuanna" target="_blank">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">47</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">36</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">10</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">Links</div><a class="author-info-links__name text-center" href="https://www.ouyangsong.com" target="_blank">欧阳松的博客</a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://github.com/niuyuanyuanna/BlogImages/raw/master/background/computer_version.png)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">NYY's blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span></div><div id="post-info"><div id="post-title">图像分割</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-07-22</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Computer-Version/">Computer Version</a><span class="post-meta__separator">|</span><i class="fa fa-comment-o post-meta__icon" aria-hidden="true"></i><a href="/2018/07/22/computer_version/imgSegmentation/#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2018/07/22/computer_version/imgSegmentation/"></span></a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">922</span><span class="post-meta__separator">|</span><span>Reading time: 3 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="图像分割"><a href="#图像分割" class="headerlink" title="图像分割"></a><center>图像分割</center></h1><p>图像分割就是预测图像中每一个像素所属的类别或者物体。图像分割有两个子问题，一个是只预测类别层面的分割，对每个像素标出一个位置。第二个是区分不同物体的个体。应用场景，比如自动驾驶，3D 地图重建，美化图片，人脸建模等等。<br>传统的图像分割通常和图像分类结合，它是图像识别的第一阶段。</p>
-<div align="center"><br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/60398275.jpg" title="图像识别流程" alt="图像识别流程" width="80%"><br></div>
-
+} </script><!-- hexo-inject:begin --><!-- hexo-inject:end --></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#分割方法"><span class="toc-number">1.</span> <span class="toc-text">分割方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基于阈值的分割"><span class="toc-number">1.1.</span> <span class="toc-text">基于阈值的分割</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#阈值"><span class="toc-number">1.1.1.</span> <span class="toc-text">阈值</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#全局阈值"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">全局阈值</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#迭代阈值图像分割"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">迭代阈值图像分割</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#动态阈值"><span class="toc-number">1.1.1.3.</span> <span class="toc-text">动态阈值</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#边缘检测"><span class="toc-number">1.2.</span> <span class="toc-text">边缘检测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于空间的分割"><span class="toc-number">1.3.</span> <span class="toc-text">基于空间的分割</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结合边缘检测及空间分割"><span class="toc-number">1.4.</span> <span class="toc-text">结合边缘检测及空间分割</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.jpg"></div><div class="author-info__name text-center">NYY</div><div class="author-info__description text-center"></div><div class="follow-button"><a href="https://github.com/niuyuanyuanna">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">48</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">37</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">10</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">Links</div><a class="author-info-links__name text-center" href="https://www.ouyangsong.com">欧阳松的博客</a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://github.com/niuyuanyuanna/BlogImages/raw/master/background/computer_version.png)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">NYY's blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span></div><div id="post-info"><div id="post-title">图像分割</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-07-22</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Computer-Version/">Computer Version</a><span class="post-meta__separator">|</span><i class="fa fa-comment-o post-meta__icon" aria-hidden="true"></i><a href="/2018/07/22/computer_version/imgSegmentation/#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2018/07/22/computer_version/imgSegmentation/"></span></a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">917</span><span class="post-meta__separator">|</span><span>Reading time: 3 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><!-- hexo-inject:begin --><!-- hexo-inject:end -->#
+<center>
+图像分割
+</center>
+<p>图像分割就是预测图像中每一个像素所属的类别或者物体。图像分割有两个子问题，一个是只预测类别层面的分割，对每个像素标出一个位置。第二个是区分不同物体的个体。应用场景，比如自动驾驶，3D 地图重建，美化图片，人脸建模等等。 传统的图像分割通常和图像分类结合，它是图像识别的第一阶段。</p>
+<div data-align="center">
+<p><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/60398275.jpg" title="图像识别流程" alt="图像识别流程" width="80%"></p>
+</div>
 <p>图像分割难点：</p>
 <ul>
 <li>噪声影响</li>
@@ -18,38 +23,49 @@
 <li>没有足够的检测数据</li>
 <li>存在病态问题</li>
 </ul>
-<p>当图像背景中存在与前景目标相 同或相似区域时，没有用户的交互，自动分割出感兴趣的前景目标这个问题本身就是病态的。<br>图像分割可以分为两类：</p>
+<p>当图像背景中存在与前景目标相 同或相似区域时，没有用户的交互，自动分割出感兴趣的前景目标这个问题本身就是病态的。 图像分割可以分为两类：</p>
 <ul>
-<li>完全分割<ul>
+<li>完全分割
+<ul>
 <li>每部分都和一个实物相关</li>
 <li>没有重叠的区域</li>
-</ul>
-</li>
-<li>部分分割<ul>
+</ul></li>
+<li>部分分割
+<ul>
 <li>拥有均匀亮度、颜色等的区域</li>
 <li>重叠的部分，需要进一步处理</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h2 id="分割方法"><a href="#分割方法" class="headerlink" title="分割方法"></a>分割方法</h2><h3 id="基于阈值的分割"><a href="#基于阈值的分割" class="headerlink" title="基于阈值的分割"></a>基于阈值的分割</h3><p>阈值分割是基于直方图的，对图像进行灰度阈值化是最简单的分割处理。图像阈值化算法简单高效，在很多场景中依然得到很多应用，实时性很好。图像阈值化的缺陷也是明显的，不能够很好的利用图像中的诸如色彩、纹理等语义信息，因此在复杂场景中无法得到目标结果。 </p>
-<h4 id="阈值"><a href="#阈值" class="headerlink" title="阈值"></a>阈值</h4><p>图像阈值化分为全局阈值和局部阈值及动态阈值。全局阈值是对整幅图像使用单个阈值，局部阈值是根据图像局部信息在局部执行阈值化。阈值化操作有许多改进算法，例如：局部阈值化、带阈值化、半阈值化、多阈值化等。阈值化的关键在于如何选择阈值。  </p>
-<p>阈值分割的优点是计算简单、运算效率较高、速度快。全局阈值对于灰度相差很大的不同目标和背景能进行有效的分割。当图像的灰度差异不明显或不同目标的灰度值范围有重叠时，应采用局部阈值或动态阈值分割法。另一方面，这种方法只考虑像素本身的灰度值，一般不考虑空间特征，因而对噪声很敏感。在实际应用中，阈值法通常与其他方法结合使用。 </p>
-<h5 id="全局阈值"><a href="#全局阈值" class="headerlink" title="全局阈值"></a>全局阈值</h5><p>全局阈值法采用同一个灰度值作为分割门限对整幅图进行处理，特别对直方图分布呈双峰态的图像分割效果好，如：</p>
-<div align="center"><br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/30853134.jpg" title="全局阈值分割" alt="全局阈值分割" width="80%"><br></div>
-
+<h2 id="分割方法">分割方法</h2>
+<h3 id="基于阈值的分割">基于阈值的分割</h3>
+<p>阈值分割是基于直方图的，对图像进行灰度阈值化是最简单的分割处理。图像阈值化算法简单高效，在很多场景中依然得到很多应用，实时性很好。图像阈值化的缺陷也是明显的，不能够很好的利用图像中的诸如色彩、纹理等语义信息，因此在复杂场景中无法得到目标结果。</p>
+<h4 id="阈值">阈值</h4>
+<p>图像阈值化分为全局阈值和局部阈值及动态阈值。全局阈值是对整幅图像使用单个阈值，局部阈值是根据图像局部信息在局部执行阈值化。阈值化操作有许多改进算法，例如：局部阈值化、带阈值化、半阈值化、多阈值化等。阈值化的关键在于如何选择阈值。</p>
+<p>阈值分割的优点是计算简单、运算效率较高、速度快。全局阈值对于灰度相差很大的不同目标和背景能进行有效的分割。当图像的灰度差异不明显或不同目标的灰度值范围有重叠时，应采用局部阈值或动态阈值分割法。另一方面，这种方法只考虑像素本身的灰度值，一般不考虑空间特征，因而对噪声很敏感。在实际应用中，阈值法通常与其他方法结合使用。</p>
+<h5 id="全局阈值">全局阈值</h5>
+<p>全局阈值法采用同一个灰度值作为分割门限对整幅图进行处理，特别对直方图分布呈双峰态的图像分割效果好，如：</p>
+<div data-align="center">
+<p><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/30853134.jpg" title="全局阈值分割" alt="全局阈值分割" width="80%"></p>
+</div>
 <p>但在有意义的全局阈值不存在的情况下，全局阈值的分割效果很差，如：</p>
-<div align="center"><br><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/36706577.jpg" title="全局阈值分割" alt="全局阈值分割" width="80%"><br></div>
-
-<h5 id="迭代阈值图像分割"><a href="#迭代阈值图像分割" class="headerlink" title="迭代阈值图像分割"></a>迭代阈值图像分割</h5><p>迭代阈值的步骤为：</p>
-<ol>
-<li>统计图像灰度直方图,求出图象的最大灰度值和最小灰度值，分别记为$Z_{max}$和$Z_{min}，令初始阈值$T_{0} = \frac {Z_{max} +Z_{min} } {2}$。</li>
+<div data-align="center">
+<p><img src="https://github.com/niuyuanyuanna/BlogImages/raw/master/computerVersion/36706577.jpg" title="全局阈值分割" alt="全局阈值分割" width="80%"></p>
+</div>
+<h5 id="迭代阈值图像分割">迭代阈值图像分割</h5>
+<p>迭代阈值的步骤为：</p>
+<ol type="1">
+<li>统计图像灰度直方图,求出图象的最大灰度值和最小灰度值，分别记为<span class="math inline">\(Z_{max}\)</span>和<span class="math inline">\(Z_{min}，令初始阈值\)</span>T_{0} =  {2}$。</li>
 <li>根据阈值TK将图象分割为前景和背景，计算小于TO所有灰度的均值ZO，和大于TO的所有灰度的均值ZB。</li>
 <li>求出新阈值TK+1=(ZO+ZB)/2；</li>
 <li>若TK==TK+1，则所得即为阈值；否则转2，迭代计算。</li>
 </ol>
-<h5 id="动态阈值"><a href="#动态阈值" class="headerlink" title="动态阈值"></a>动态阈值</h5><h3 id="边缘检测"><a href="#边缘检测" class="headerlink" title="边缘检测"></a>边缘检测</h3><p>通过不同的特征检测物体边缘</p>
-<h3 id="基于空间的分割"><a href="#基于空间的分割" class="headerlink" title="基于空间的分割"></a>基于空间的分割</h3><p>寻找满足homogeneity criterion 条件的最大空间。</p>
-<h3 id="结合边缘检测及空间分割"><a href="#结合边缘检测及空间分割" class="headerlink" title="结合边缘检测及空间分割"></a>结合边缘检测及空间分割</h3></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">NYY</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yoursite.com/2018/07/22/computer_version/imgSegmentation/">http://yoursite.com/2018/07/22/computer_version/imgSegmentation/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CV/">CV</a><a class="post-meta__tags" href="/tags/图像处理/">图像处理</a><a class="post-meta__tags" href="/tags/原理/">原理</a></div><div class="social-share"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><nav id="pagination"><div class="prev-post pull-left"><a href="/2018/07/26/computer_version/R-CNN/"><i class="fa fa-chevron-left">  </i><span>R-CNN目标检测方法</span></a></div><div class="next-post pull-right"><a href="/2018/07/22/deep_learning/activation-func/"><span>常见激活函数</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="disqus_thread"></div><script>var unused = null;
+<h5 id="动态阈值">动态阈值</h5>
+<h3 id="边缘检测">边缘检测</h3>
+<p>通过不同的特征检测物体边缘</p>
+<h3 id="基于空间的分割">基于空间的分割</h3>
+<p>寻找满足homogeneity criterion 条件的最大空间。</p>
+<h3 id="结合边缘检测及空间分割">结合边缘检测及空间分割</h3>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">NYY</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yoursite.com/2018/07/22/computer_version/imgSegmentation/">http://yoursite.com/2018/07/22/computer_version/imgSegmentation/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CV/">CV</a><a class="post-meta__tags" href="/tags/图像处理/">图像处理</a><a class="post-meta__tags" href="/tags/原理/">原理</a></div><div class="social-share"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><nav id="pagination"><div class="prev-post pull-left"><a href="/2018/07/26/computer_version/R-CNN/"><i class="fa fa-chevron-left">  </i><span>R-CNN目标检测方法</span></a></div><div class="next-post pull-right"><a href="/2018/07/22/deep_learning/activation-func/"><span>常见激活函数</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="disqus_thread"></div><script>var unused = null;
 var disqus_config = function () {
   this.page.url = 'http://yoursite.com/2018/07/22/computer_version/imgSegmentation/';
   this.page.identifier = '2018/07/22/computer_version/imgSegmentation/';
@@ -58,17 +74,24 @@ var disqus_config = function () {
 var d = document, s = d.createElement('script');
 s.src = "https://" + 'niuyuanyuan' +".disqus.com/embed.js";
 s.setAttribute('data-timestamp', '' + +new Date());
-(d.head || d.body).appendChild(s);</script><script id="dsq-count-src" src="https://niuyuanyuan.disqus.com/count.js" async></script></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2018 - 2019 By NYY</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="/js/third-party/anime.min.js"></script><script src="/js/third-party/jquery.min.js"></script><script src="/js/third-party/jquery.fancybox.min.js"></script><script src="/js/third-party/velocity.min.js"></script><script src="/js/third-party/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.5.6"></script><script src="/js/fancybox.js?version=1.5.6"></script><script src="/js/sidebar.js?version=1.5.6"></script><script src="/js/copy.js?version=1.5.6"></script><script src="/js/fireworks.js?version=1.5.6"></script><script src="/js/transition.js?version=1.5.6"></script><script src="/js/scroll.js?version=1.5.6"></script><script src="/js/head.js?version=1.5.6"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-    processEscapes: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-  }
-});
-</script><script type="text/x-mathjax-config">MathJax.Hub.Queue(function() {
-  var all = MathJax.Hub.getAllJax(), i;
-  for (i=0; i < all.length; i += 1) {
-    all[i].SourceElement().parentNode.className += ' has-jax';
-  }
-});
-</script><script src="https://cdn.jsdelivr.net/npm/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></body></html>
+(d.head || d.body).appendChild(s);</script><script id="dsq-count-scr" src="https://niuyuanyuan.disqus.com/count.js" async></script></div></div><footer class="footer-bg" style="background-image: url(https://github.com/niuyuanyuanna/BlogImages/raw/master/background/computer_version.png)"><div class="layout" id="footer"><div class="copyright">&copy;2018 - 2019 By NYY</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css"><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+}</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end --></body></html>
